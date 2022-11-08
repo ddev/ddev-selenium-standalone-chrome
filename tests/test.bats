@@ -24,7 +24,6 @@ teardown() {
   echo "# ddev get ${DIR} with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
   ddev get ${DIR}
   ddev restart
-  ddev describe
   # Do something here to verify functioning extra service
   # For extra credit, use a real CMS with actual config.
   ddev exec "curl -v selenium-chrome:4444/wd/hub/status"
