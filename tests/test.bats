@@ -26,8 +26,8 @@ teardown() {
   ddev restart
   ddev exec "curl -v selenium-chrome:4444/wd/hub/status"
   # Fetch Drupal core and run a FunctionalJavascript test.
-  composer create-project 'drupal/recommended-project:^9' my-project
-  composer require --dev 'drupal/core-dev:^9'
+  composer -n -q create-project 'drupal/recommended-project:^9' my-project
+  composer -n -q require --dev 'drupal/core-dev:^9'
   ddev exec -d /var/www/html/web "../vendor/bin/phpunit -v -c ./core/phpunit.xml.dist ./core/modules/system/tests/src/FunctionalJavascript/FrameworkTest.php"
 }
 
