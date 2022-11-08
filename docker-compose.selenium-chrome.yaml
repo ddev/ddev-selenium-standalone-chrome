@@ -29,6 +29,8 @@ services:
       - BROWSERTEST_OUTPUT_DIRECTORY=/tmp
       # Note: Do not modify the base URL value.
       - BROWSERTEST_OUTPUT_BASE_URL=${DDEV_PRIMARY_URL}
+      # This works assuming the site has not deviated from the default.
+      - DTT_BASE_URL=http://ddev-${DDEV_SITENAME}-web
       # Use disable-dev-shm-usage instead of setting shm_usage
       # https://developers.google.com/web/tools/puppeteer/troubleshooting#tips
       # The format of chromeOptions is defined at https://chromedriver.chromium.org/capabilities
