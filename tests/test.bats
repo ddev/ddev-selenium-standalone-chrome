@@ -26,6 +26,7 @@ teardown() {
   ddev restart
   ddev exec "curl -v selenium-chrome:4444/wd/hub/status"
   # Fetch Drupal core and run a FunctionalJavascript test.
+  composer -n config --no-plugins allow-plugins true
   composer -n -q create-project 'drupal/recommended-project:^9' my-project
   composer -n -q require --dev 'drupal/core-dev:^9'
   ddev exec -d /var/www/html/web "../vendor/bin/phpunit -v -c ./core/phpunit.xml.dist ./core/modules/system/tests/src/FunctionalJavascript/FrameworkTest.php"
@@ -37,6 +38,5 @@ teardown() {
   echo "# ddev get weitzman/ddev-selenium-standalone-chrome with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
   ddev get weitzman/ddev-selenium-standalone-chrome
   ddev restart >/dev/null
-  # Do something useful here that verifies the add-on
   ddev exec "curl -v selenium-chrome:4444/wd/hub/status"
 }
