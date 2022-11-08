@@ -26,7 +26,7 @@ teardown() {
   ddev restart
   # Do something here to verify functioning extra service
   # For extra credit, use a real CMS with actual config.
-  # ddev exec "curl -s elasticsearch:9200" | grep "${PROJNAME}-elasticsearch"
+  ddev exec "curl -s selenium-chrome:4444/wd/hub/status" | grep "\"ready\": true"
 }
 
 @test "install from release" {
@@ -36,5 +36,5 @@ teardown() {
   ddev get drud/ddev-addon-template
   ddev restart >/dev/null
   # Do something useful here that verifies the add-on
-  # ddev exec "curl -s elasticsearch:9200" | grep "${PROJNAME}-elasticsearch"
+  ddev exec "curl -s selenium-chrome:4444/wd/hub/status" | grep "\"ready\": true"
 }
