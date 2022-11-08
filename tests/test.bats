@@ -24,9 +24,11 @@ teardown() {
   echo "# ddev get ${DIR} with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
   ddev get ${DIR}
   ddev restart
-  # Do something here to verify functioning extra service
-  # For extra credit, use a real CMS with actual config.
   ddev exec "curl -v selenium-chrome:4444/wd/hub/status"
+  # Fetch Drupal core and run a FunctionalJavascript test.
+  composer create-project 'drupal/recommended-project:^9' my-project
+  composer require --dev 'drupal/core-dev:^9'
+  ddev exec -d /var/www/html/web "../vendor/bin/phpunit -v -c ./core/phpunit.xml.dist ./core/modules/system/tests/src/FunctionalJavascript/FrameworkTest.php"
 }
 
 @test "install from release" {
