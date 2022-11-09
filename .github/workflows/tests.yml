@@ -92,6 +92,13 @@ jobs:
         path: |
           *.junit.xml
 
+    - name: Nightwatch reports
+      uses: actions/upload-artifact@v3
+      with:
+        name: nightwatch
+        path: |
+          web/core/reports/nightwatch
+
     # keepalive-workflow adds a dummy commit if there's no other action here, keeps
     # GitHub from turning off tests after 60 days
     - uses: gautamkrishnar/keepalive-workflow@v1
