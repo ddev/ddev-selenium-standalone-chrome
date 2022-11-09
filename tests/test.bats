@@ -7,7 +7,7 @@ setup() {
   export DDEV_NON_INTERACTIVE=true
   ddev delete -Oy ${PROJNAME} >/dev/null 2>&1 || true
   cd "${TESTDIR}"
-  ddev config --project-name=${PROJNAME}
+  ddev config --project-name=${PROJNAME} --php-version=8.1
   composer -n --no-install create-project 'drupal/recommended-project:^9' my-project
   cd my-project
   composer -n config --no-plugins allow-plugins true
