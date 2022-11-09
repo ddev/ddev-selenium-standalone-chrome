@@ -28,11 +28,12 @@ teardown() {
   echo "# ddev get ${DIR} with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
   ddev get ${DIR}
   ddev restart
+  ddev exec ls
   ddev exec "curl -v selenium-chrome:4444/wd/hub/status"
   # Fetch Drupal core and run a FunctionalJavascript test.
-  ddev exec -d /var/www/html/web "../vendor/bin/phpunit -v -c ./core/phpunit.xml.dist ./core/modules/system/tests/src/FunctionalJavascript/FrameworkTest.php"
+  ddev exec -d /var/www/html/my-project/web "../vendor/bin/phpunit -v -c ./core/phpunit.xml.dist ./core/modules/system/tests/src/FunctionalJavascript/FrameworkTest.php"
   # Now run a DTT test.
-  # ddev exec -d /var/www/html/web "../vendor/bin/drush si -yv --account-name=admin --account-pass=password standard"
+  # ddev exec -d /var/www/html/my-project/web "../vendor/bin/drush si -yv --account-name=admin --account-pass=password standard"
 }
 
 @test "install from release" {
