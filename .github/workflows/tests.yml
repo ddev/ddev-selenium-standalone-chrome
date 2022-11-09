@@ -81,7 +81,7 @@ jobs:
     - name: Archive artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: dist-without-markdown
+        name: browser_output
         path: |
           /var/www/html/web/sites/simpletest/browser_output
 
