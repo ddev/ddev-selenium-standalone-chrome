@@ -28,10 +28,10 @@ services:
     environment:
       - BROWSERTEST_OUTPUT_DIRECTORY=/tmp
       - BROWSERTEST_OUTPUT_BASE_URL=${DDEV_PRIMARY_URL}
-      - 'MINK_DRIVER_ARGS_WEBDRIVER=["chrome", {"browserName":"chrome","chromeOptions":{"w3c":false,"args":["--disable-gpu","--headless", "--no-sandbox", "--disable-dev-shm-usage"]}}, "http://selenium-chrome:4444/wd/hub"]'
-      # This works assuming the site has not deviated from the default.
-      - DTT_BASE_URL=http://web
+      - SIMPLETEST_BASE_URL=http://web
       # Use disable-dev-shm-usage instead of setting shm_usage
       # https://developers.google.com/web/tools/puppeteer/troubleshooting#tips
       # The format of chromeOptions is defined at https://chromedriver.chromium.org/capabilities
+      - 'MINK_DRIVER_ARGS_WEBDRIVER=["chrome", {"browserName":"chrome","chromeOptions":{"w3c":false,"args":["--disable-gpu","--headless", "--no-sandbox", "--disable-dev-shm-usage"]}}, "http://selenium-chrome:4444/wd/hub"]'
+      - DTT_BASE_URL=http://web
       - 'DTT_MINK_DRIVER_ARGS_WEBDRIVER=["chrome", {"browserName":"chrome","chromeOptions":{"w3c":false,"args":["--disable-gpu","--headless", "--no-sandbox", "--disable-dev-shm-usage"]}}, "http://selenium-chrome:4444/wd/hub"]'
