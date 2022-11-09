@@ -83,7 +83,7 @@ jobs:
       with:
         name: browser_output
         path: |
-          web/sites/simpletest
+          web/sites/simpletest/browser_output
 
     - name: Archive junits
       uses: actions/upload-artifact@v3
