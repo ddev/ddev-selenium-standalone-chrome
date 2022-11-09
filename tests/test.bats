@@ -5,7 +5,7 @@ setup() {
   mkdir -p $TESTDIR
   export PROJNAME=testchrome
   export DDEV_NON_INTERACTIVE=true
-  export SYMFONY_DEPRECATIONS_HELPER=weak
+  export SYMFONY_DEPRECATIONS_HELPER=disabled
   ddev delete -Oy ${PROJNAME} >/dev/null 2>&1 || true
   cd "${TESTDIR}"
   composer -n --no-install create-project 'drupal/recommended-project:^9' .

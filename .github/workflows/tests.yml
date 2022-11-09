@@ -78,13 +78,19 @@ jobs:
     - name: tests
       run: bats tests
 
-    - name: Archive artifacts
+    - name: Archive browser_output
       uses: actions/upload-artifact@v3
       with:
         name: browser_output
         path: |
           web/sites/simpletest
-          *.junit.xml
+
+    - name: Archive junits
+        uses: actions/upload-artifact@v3
+        with:
+          name: junits
+          path: |
+            *.junit.xml
 
     # keepalive-workflow adds a dummy commit if there's no other action here, keeps
     # GitHub from turning off tests after 60 days
