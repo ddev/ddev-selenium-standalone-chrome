@@ -32,6 +32,7 @@ teardown() {
   echo "Run a FunctionalJavascript test." >&3
   ddev exec -d /var/www/html/web "../vendor/bin/phpunit -v -c ./core/phpunit.xml.dist ./core/modules/system/tests/src/FunctionalJavascript/FrameworkTest.php"
   echo "Run a Nightwatch test." >&3
+  ddev exec -d /var/www/html/web/core yarn install
   ddev exec -d /var/www/html/web/core touch .env
   ddev exec -d /var/www/html/web/core yarn test:nightwatch tests/Drupal/Nightwatch/Tests/exampleTest.js
   echo "Install Drupal and run a DTT test." >&3
