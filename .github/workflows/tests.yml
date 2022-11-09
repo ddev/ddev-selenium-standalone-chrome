@@ -83,7 +83,7 @@ jobs:
       with:
         name: dist-without-markdown
         path: |
-          /var/www/html/my-project/web/sites/simpletest/browser_output
+          /var/www/html/web/sites/simpletest/browser_output
 
     # keepalive-workflow adds a dummy commit if there's no other action here, keeps
     # GitHub from turning off tests after 60 days

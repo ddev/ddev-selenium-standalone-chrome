@@ -7,11 +7,10 @@ setup() {
   export DDEV_NON_INTERACTIVE=true
   ddev delete -Oy ${PROJNAME} >/dev/null 2>&1 || true
   cd "${TESTDIR}"
-  ddev config --project-name=${PROJNAME} --php-version=8.1 --docroot=web/my-project
-  composer -n --no-install create-project 'drupal/recommended-project:^9' my-project
-  cd my-project
+  composer -n --no-install create-project 'drupal/recommended-project:^9' .
   composer -n config --no-plugins allow-plugins true
   composer -n require 'drupal/core-dev:^9' 'drush/drush:^11' 'phpspec/prophecy-phpunit:^2'
+  ddev config --project-name=${PROJNAME} --php-version=8.1
   ddev start -y >/dev/null
 }
 
@@ -31,9 +30,9 @@ teardown() {
   ddev exec ls
   ddev exec "curl -v selenium-chrome:4444/wd/hub/status"
   echo "Run a FunctionalJavascript test." >&3
-  ddev exec -d /var/www/html/my-project/web "../vendor/bin/phpunit -v -c ./core/phpunit.xml.dist ./core/modules/system/tests/src/FunctionalJavascript/FrameworkTest.php"
+  ddev exec -d /var/www/html/web "../vendor/bin/phpunit -v -c ./core/phpunit.xml.dist ./core/modules/system/tests/src/FunctionalJavascript/FrameworkTest.php"
   echo "Install Drupal and run a DTT test." >&3
-  ddev exec -d /var/www/html/my-project/web "../vendor/bin/drush si -yv --account-name=admin --account-pass=password standard"
+  ddev exec -d /var/www/html/web "../vendor/bin/drush si -yv --account-name=admin --account-pass=password standard"
 }
 
 @test "install from release" {
