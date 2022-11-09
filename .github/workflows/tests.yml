@@ -84,6 +84,7 @@ jobs:
         name: browser_output
         path: |
           web/sites/simpletest
+          *.junit.xml
 
     # keepalive-workflow adds a dummy commit if there's no other action here, keeps
     # GitHub from turning off tests after 60 days
