@@ -6,12 +6,12 @@ In ddev v1.19+, run `ddev get weitzman/ddev-selenium-standalone-chrome` to fetch
 
 ## Use
 
-- Your project is now ready to run client side tests from Drupal core or [Drupal Test Traits](https://gitlab.com/weitzman/drupal-test-traits) (DTT). 
+- Your project is now ready to run client side tests from Drupal core or [Drupal Test Traits](https://gitlab.com/weitzman/drupal-test-traits) (DTT). Both types are tested in this repo. 
 - On your host, browse to https://[DDEV SITE URL]:7910 (password: `secret`) to watch tests run (neat!).
 
 ## Contribute
 
-- Anyone is welcome to submit a PR to this repo.
+- Anyone is welcome to submit a PR to this repo. See README.md at https://github.com/drud/ddev-addon-template, the parent of this repo.
 
 ## Maintainer
 
