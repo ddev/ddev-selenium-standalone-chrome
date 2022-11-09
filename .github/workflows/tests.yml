@@ -83,7 +83,7 @@ jobs:
       with:
         name: browser_output
         path: |
-          /var/www/html/web/sites/simpletest/browser_output
+          web/sites/simpletest/browser_output
 
     # keepalive-workflow adds a dummy commit if there's no other action here, keeps
     # GitHub from turning off tests after 60 days
