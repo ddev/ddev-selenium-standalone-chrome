@@ -33,7 +33,7 @@ teardown() {
   echo "Run a FunctionalJavascript test." >&3
   ddev exec -d /var/www/html/my-project/web "../vendor/bin/phpunit -v -c ./core/phpunit.xml.dist ./core/modules/system/tests/src/FunctionalJavascript/FrameworkTest.php"
   echo "Install Drupal and run a DTT test." >&3
-  # ddev exec -d /var/www/html/my-project/web "../vendor/bin/drush si -yv --account-name=admin --account-pass=password standard"
+  ddev exec -d /var/www/html/my-project/web "../vendor/bin/drush si -yv --account-name=admin --account-pass=password standard"
 }
 
 @test "install from release" {
