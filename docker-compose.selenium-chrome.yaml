@@ -35,4 +35,4 @@ services:
       # The format of chromeOptions is defined at https://chromedriver.chromium.org/capabilities
       - 'MINK_DRIVER_ARGS_WEBDRIVER=["chrome", {"browserName":"chrome","chromeOptions":{"w3c":false,"args":["--disable-gpu","--headless", "--no-sandbox", "--disable-dev-shm-usage"]}}, "http://selenium-chrome:4444/wd/hub"]'
       - DTT_BASE_URL=http://web
-      - 'DTT_MINK_DRIVER_ARGS_WEBDRIVER=["chrome", {"browserName":"chrome","chromeOptions":{"w3c":false,"args":["--disable-gpu","--headless", "--no-sandbox", "--disable-dev-shm-usage"]}}, "http://selenium-chrome:4444/wd/hub"]'
+      - 'DTT_MINK_DRIVER_ARGS=["chrome", {"browserName":"chrome","chromeOptions":{"w3c":false,"args":["--disable-gpu","--headless", "--no-sandbox", "--disable-dev-shm-usage"]}}, "http://selenium-chrome:4444/wd/hub"]'
