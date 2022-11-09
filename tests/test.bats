@@ -8,6 +8,10 @@ setup() {
   ddev delete -Oy ${PROJNAME} >/dev/null 2>&1 || true
   cd "${TESTDIR}"
   ddev config --project-name=${PROJNAME}
+  composer -n --no-install create-project 'drupal/recommended-project:^9' my-project
+  cd my-project
+  composer -n config --no-plugins allow-plugins true
+  composer -n require 'drupal/core-dev:^9' 'drush/drush:^11'
   ddev start -y >/dev/null
 }
 
@@ -26,13 +30,9 @@ teardown() {
   ddev restart
   ddev exec "curl -v selenium-chrome:4444/wd/hub/status"
   # Fetch Drupal core and run a FunctionalJavascript test.
-  composer -n --no-install create-project 'drupal/recommended-project:^9' my-project
-  cd my-project
-  composer -n config --no-plugins allow-plugins true
-  composer -n require 'drupal/core-dev:^9' 'drush/drush:^11'
   ddev exec -d /var/www/html/web "../vendor/bin/phpunit -v -c ./core/phpunit.xml.dist ./core/modules/system/tests/src/FunctionalJavascript/FrameworkTest.php"
   # Now run a DTT test.
-  # ddev exec -d /var/www/html/web ../vendor/bin/drush si -yv --account-name=admin --account-pass=password standard
+  # ddev exec -d /var/www/html/web "../vendor/bin/drush si -yv --account-name=admin --account-pass=password standard"
 }
 
 @test "install from release" {
