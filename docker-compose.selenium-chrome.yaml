@@ -1,3 +1,5 @@
+# This file comes from https://github.com/weitzman/ddev-selenium-standalone-chrome.
+#
 version: '3.6'
 services:
   selenium-chrome:
