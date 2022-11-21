@@ -1,8 +1,8 @@
-[![tests](https://github.com/weitzman/ddev-selenium-standalone-chrome/actions/workflows/tests.yml/badge.svg)](https://github.com/drud/ddev-addon-template/actions/workflows/tests.yml) ![project is maintained](https://img.shields.io/maintenance/yes/2022.svg)
+[![tests](https://github.com/drud/ddev-selenium-standalone-chrome/actions/workflows/tests.yml/badge.svg)](https://github.com/drud/ddev-addon-template/actions/workflows/tests.yml) ![project is maintained](https://img.shields.io/maintenance/yes/2022.svg)
 
 ## Introduction
 
-In ddev v1.19+, run `ddev get weitzman/ddev-selenium-standalone-chrome` to fetch this service into your local DDEV installation. You may then check it into your source control if desired.
+In ddev v1.19+, run `ddev get drud/ddev-selenium-standalone-chrome` to fetch this service into your local DDEV installation. You may then check it into your source control if desired.
 
 This service can be used with any project type. The examples below are Drupal-specific. Contributions for docs and tests that show this service working with other project types are appreciated.
 
