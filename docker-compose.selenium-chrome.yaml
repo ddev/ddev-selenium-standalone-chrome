@@ -31,7 +31,9 @@ services:
       - BROWSERTEST_OUTPUT_DIRECTORY=/tmp
       - BROWSERTEST_OUTPUT_BASE_URL=${DDEV_PRIMARY_URL}
       - SIMPLETEST_BASE_URL=http://web
-      - SIMPLETEST_DB=mysql://db:db@db/db
+      - SIMPLETEST_DB_MYSQL: &simpletest_db_mysql mysql://db:db@db:3306/db
+      - SIMPLETEST_DB_SQLITE: &simpletest_db_sqlite sqlite://localhost//dev/shm/test.sqlite
+      - SIMPLETEST_DB: *simpletest_db_sqlite
       # Use disable-dev-shm-usage instead of setting shm_usage
       # https://developers.google.com/web/tools/puppeteer/troubleshooting#tips
       # The format of chromeOptions is defined at https://chromedriver.chromium.org/capabilities
