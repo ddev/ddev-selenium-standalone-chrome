@@ -1,3 +1,5 @@
+#ddev-generated
+#
 # This file comes from https://github.com/drud/ddev-selenium-standalone-chrome.
 #
 version: '3.6'

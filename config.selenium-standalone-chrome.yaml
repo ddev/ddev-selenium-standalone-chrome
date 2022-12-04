@@ -1,3 +1,7 @@
+#ddev-generated
+#
+# This file comes from https://github.com/drud/ddev-selenium-standalone-chrome.
+#
 web_environment:
   - BROWSERTEST_OUTPUT_DIRECTORY=/tmp
   - BROWSERTEST_OUTPUT_BASE_URL=${DDEV_PRIMARY_URL}
