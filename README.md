@@ -2,9 +2,14 @@
 
 ## Introduction
 
-In ddev v1.19+, run `ddev get drud/ddev-selenium-standalone-chrome` to fetch this service into your local DDEV installation. You may then check it into your source control if desired.
-
 This service can be used with any project type. The examples below are Drupal-specific. Contributions for docs and tests that show this service working with other project types are appreciated.
+
+## Install/Update
+
+1. `ddev get drud/ddev-selenium-standalone-chrome`
+2. Optional. Update the provided .ddev/config.selenium-standalone-chrome.yaml as you see fit(and remove the #ddev-generated line). You can also just override lines in your .ddev/config.yaml
+3. Optional. Check config.selenium-standalone-chrome.yaml and docker-compose.selenium-chrome.yaml into your source control.
+4. Update by re-running `ddev get drud/ddev-selenium-standalone-chrome`.
 
 ## Use
 
