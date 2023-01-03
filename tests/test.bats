@@ -7,11 +7,11 @@ setup() {
   export DDEV_NON_INTERACTIVE=true
   ddev delete -Oy ${PROJNAME} >/dev/null 2>&1 || true
   cd "${TESTDIR}"
-  composer -n --no-install create-project 'drupal/recommended-project:^9' .
-  composer -n config --no-plugins allow-plugins true
-  composer -n require 'drupal/core-dev:^9' 'drush/drush:^11' 'phpspec/prophecy-phpunit:^2' 'weitzman/drupal-test-traits:2.0.0-rc1'
   ddev config --project-name=${PROJNAME} --php-version=8.1 --web-environment-add SYMFONY_DEPRECATIONS_HELPER=disabled
   ddev start -y >/dev/null
+  ddev composer -n --no-install create-project 'drupal/recommended-project:^9' .
+  ddev composer -n config --no-plugins allow-plugins true
+  ddev composer -n require 'drupal/core-dev:^9' 'drush/drush:^11' 'phpspec/prophecy-phpunit:^2' 'weitzman/drupal-test-traits:^2'
 }
 
 teardown() {
