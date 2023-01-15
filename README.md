@@ -26,6 +26,7 @@ This service can be used with any project type. The examples below are Drupal-sp
     - `ddev exec -d /var/www/html/web "../vendor/bin/phpunit --bootstrap=../vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php --printer '\Drupal\Tests\Listeners\HtmlOutputPrinter' ../vendor/weitzman/drupal-test-traits/tests/ExampleSelenium2DriverTest.php"`
   - Behat
     - When setting up a local `behat.yml`, for the value of `wd_host`, use `http://selenium-chrome:4444/wd/hub`. For additional config values, see `config.selenium-standalone-chrome.yaml`.
+    - If your ddev site uses `https`, Chrome will complain about a self-signed certificate. This can be disabled by setting `Drupal\MinkExtension: sessions: javascript: selenium2: capabilities: chrome: switches: - '--ignore-certificate-errors'`.
 - On your host, browse to https://[DDEV SITE URL]:7900 (password: `secret`) to watch tests run (neat!).
 
 ## Contribute
