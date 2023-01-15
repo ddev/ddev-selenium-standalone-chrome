@@ -7,7 +7,7 @@ This service can be used with any project type. The examples below are Drupal-sp
 ## Install/Update
 
 1. `ddev get drud/ddev-selenium-standalone-chrome`
-2. Optional. Update the provided .ddev/config.selenium-standalone-chrome.yaml as you see fit(and remove the #ddev-generated line). You can also just override lines in your .ddev/config.yaml
+2. Optional. Update the provided .ddev/config.selenium-standalone-chrome.yaml as you see fit (and remove the #ddev-generated line). You can also just override lines in your .ddev/config.yaml. Note that this installs the seleniarm image by default (for Apple Silicon machines), so if you are on x86 you probably want to use the [docker-selenium images](https://github.com/SeleniumHQ/docker-selenium) instead.
 3. Optional. Check config.selenium-standalone-chrome.yaml and docker-compose.selenium-chrome.yaml into your source control.
 4. Update by re-running `ddev get drud/ddev-selenium-standalone-chrome`.
 
@@ -24,6 +24,8 @@ This service can be used with any project type. The examples below are Drupal-sp
   - Drupal Test Traits
     - Ensure you have a working site that has the `weitzman/drupal-test-traits` Composer package.
     - `ddev exec -d /var/www/html/web "../vendor/bin/phpunit --bootstrap=../vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php --printer '\Drupal\Tests\Listeners\HtmlOutputPrinter' ../vendor/weitzman/drupal-test-traits/tests/ExampleSelenium2DriverTest.php"`
+  - Behat
+    - When setting up a local `behat.yml`, for the value of `wd_host`, use `http://selenium-chrome:4444/wd/hub`. For additional config values, see `config.selenium-standalone-chrome.yaml`.
 - On your host, browse to https://[DDEV SITE URL]:7900 (password: `secret`) to watch tests run (neat!).
 
 ## Contribute
