@@ -7,7 +7,7 @@ This service can be used with any project type. The examples below are Drupal-sp
 ## Install/Update
 
 1. `ddev get drud/ddev-selenium-standalone-chrome`
-2. Optional. Update the provided .ddev/config.selenium-standalone-chrome.yaml as you see fit (and remove the #ddev-generated line). You can also just override lines in your .ddev/config.yaml. Note that this installs the seleniarm image by default (for Apple Silicon machines), so if you are on x86 you probably want to use the [docker-selenium images](https://github.com/SeleniumHQ/docker-selenium) instead.
+2. Optional. Update the provided .ddev/config.selenium-standalone-chrome.yaml as you see fit (and remove the #ddev-generated line). You can also just override lines in your .ddev/config.yaml.
 3. Optional. Check config.selenium-standalone-chrome.yaml and docker-compose.selenium-chrome.yaml into your source control.
 4. Update by re-running `ddev get drud/ddev-selenium-standalone-chrome`.
 
