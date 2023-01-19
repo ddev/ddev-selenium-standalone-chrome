@@ -19,7 +19,7 @@ This service can be used with any project type. The examples below are Drupal-sp
     - `ddev exec -d /var/www/html/web "../vendor/bin/phpunit -v -c ./core/phpunit.xml.dist ./core/modules/system/tests/src/FunctionalJavascript/FrameworkTest.php"`
   - Nightwatch
     - `ddev exec -d /var/www/html/web/core yarn install` (do this once)
-    - `ddev exec -d /var/www/html/web/core touch .env` ((do this once))
+    - `ddev exec -d /var/www/html/web/core touch .env` (do this once)
     - `ddev exec -d /var/www/html/web/core yarn test:nightwatch tests/Drupal/Nightwatch/Tests/exampleTest.js`
   - Drupal Test Traits
     - Ensure you have a working site that has the `weitzman/drupal-test-traits` Composer package.
