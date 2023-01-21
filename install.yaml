@@ -3,6 +3,7 @@ pre_install_actions:
 project_files:
 - docker-compose.selenium-chrome.yaml
 - config.selenium-standalone-chrome.yaml
+- selenium-standalone-chrome/Dockerfile
 global_files:
 post_install_actions:
 yaml_read_files:

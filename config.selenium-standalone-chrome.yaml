@@ -4,6 +4,16 @@
 #
 # This file comes from https://github.com/drud/ddev-selenium-standalone-chrome
 #
+hooks:
+  # Make sure that the standard mkcert CA keys are readable
+  # as they normally are owned by the ddev-defined user, and here we're running
+  # as 'seluser'
+  # and do a mkcert -install so we can trust them
+  post-start:
+    - exec: "sudo chmod ugo+r /mnt/ddev-global-cache/mkcert/*"
+    - exec: "mkcert -install"
+      service: selenium-chrome
+
 web_environment:
   - BROWSERTEST_OUTPUT_DIRECTORY=/tmp
   - BROWSERTEST_OUTPUT_BASE_URL=${DDEV_PRIMARY_URL}
