@@ -49,6 +49,8 @@ If you want to use the browser provided by this addon to check out the test resu
 
 You can now connect to [DDEV SITE URL]:5900 (password: `secret`) in your VNC client.
 
+Note that when using `ports`, only one project at a time can be running with port 5900.
+
 ## Contribute
 
 - Anyone is welcome to submit a PR to this repo. See README.md at https://github.com/drud/ddev-addon-template, the parent of this repo.
