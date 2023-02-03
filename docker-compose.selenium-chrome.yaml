@@ -19,9 +19,10 @@ services:
       - HTTP_EXPOSE=7910:7900
     external_links:
       - ddev-router:${DDEV_SITENAME}.${DDEV_TLD}
-      #ports:
-      # VNC access for a traditional VNC client like macOS "Screen Sharing".
-      # - "5900:5900"
+    # To enable VNC access for traditional VNC clients like macOS "Screen Sharing",
+    # uncomment the following two lines.
+    #ports:
+    #  - "5900:5900"
     labels:
       com.ddev.site-name: ${DDEV_SITENAME}
       com.ddev.approot: $DDEV_APPROOT
