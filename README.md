@@ -1,4 +1,4 @@
-[![tests](https://github.com/drud/ddev-selenium-standalone-chrome/actions/workflows/tests.yml/badge.svg)](https://github.com/drud/ddev-addon-template/actions/workflows/tests.yml) ![project is maintained](https://img.shields.io/maintenance/yes/2024.svg)
+[![tests](https://github.com/ddev/ddev-selenium-standalone-chrome/actions/workflows/tests.yml/badge.svg)](https://github.com/ddev/ddev-addon-template/actions/workflows/tests.yml) ![project is maintained](https://img.shields.io/maintenance/yes/2024.svg)
 
 ## Introduction
 
@@ -6,10 +6,10 @@ This service can be used with any project type. The examples below are Drupal-sp
 
 ## Install/Update
 
-1. `ddev get drud/ddev-selenium-standalone-chrome`
+1. `ddev get ddev/ddev-selenium-standalone-chrome`
 2. Optional. Update the provided .ddev/config.selenium-standalone-chrome.yaml as you see fit(and remove the #ddev-generated line). You can also just override lines in your .ddev/config.yaml
 3. Optional. Check config.selenium-standalone-chrome.yaml and docker-compose.selenium-chrome.yaml into your source control.
-4. Update by re-running `ddev get drud/ddev-selenium-standalone-chrome`.
+4. Update by re-running `ddev get ddev/ddev-selenium-standalone-chrome`.
 
 ## Use
 
@@ -28,7 +28,7 @@ This service can be used with any project type. The examples below are Drupal-sp
 
 ## Contribute
 
-- Anyone is welcome to submit a PR to this repo. See README.md at https://github.com/drud/ddev-addon-template, the parent of this repo.
+- Anyone is welcome to submit a PR to this repo. See README.md at https://github.com/ddev/ddev-addon-template, the parent of this repo.
 
 ## Maintainer
 
