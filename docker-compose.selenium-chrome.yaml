@@ -1,8 +1,8 @@
 #ddev-generated
 # Remove the line above if you don't want this file to be overwritten when you run
-# ddev get drud/ddev-selenium-standalone-chrome
+# ddev get ddev/ddev-selenium-standalone-chrome
 #
-# This file comes from https://github.com/drud/ddev-selenium-standalone-chrome
+# This file comes from https://github.com/ddev/ddev-selenium-standalone-chrome
 #
 version: '3.6'
 services:
