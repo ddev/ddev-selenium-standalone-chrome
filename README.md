@@ -29,9 +29,10 @@ This service can be used with any project type. The examples below are Drupal-sp
 
 ### The easy way: Use noVNC (built-in)
 
-On your host, browse to https://[DDEV SITE URL]:7900 (password: `secret`) to watch tests run with noVNC (neat!).
+1. In your project's _.ddev/config.selenium-standalone-chrome.yaml_, on the line that sets arguments for `MINK_DRIVER_ARGS_WEBDRIVER`, delete `\"--headless\",`, to enable the tests to run in the browser (not in headless mode).
+2. On your host, browse to https://[DDEV SITE URL]:7900 (password: `secret`) to watch tests run with noVNC (neat!).
 
-This is a no-configuration solution that enables you to quickly see what is going on with your tests.
+This enables you to quickly see what is going on with your tests.
 
 ### Use a local VNC client (try noVNC first!)
 
