@@ -11,6 +11,11 @@ This service can be used with any project type. The examples below are Drupal-sp
 3. Optional. Check config.selenium-standalone-chrome.yaml and docker-compose.selenium-chrome.yaml into your source control.
 4. Update by re-running `ddev get ddev/ddev-selenium-standalone-chrome`.
 
+## Docker Desktop guidance
+If you are using Docker Desktop, avoid using the new VirtioFS.  It has been reported to cause strange file permission issues that can break Functional and FunctionalJavascript tests. 
+
+Use gRPC FUSE for now until they [https://github.com/docker/for-mac/issues/6614](fix these issues upstream).
+
 ## Use
 
 - Your project is now ready to run FunctionalJavascript and [Nightwatch](https://www.drupal.org/docs/automated-testing/javascript-testing-using-nightwatch) tests from Drupal core, or [Drupal Test Traits](https://gitlab.com/weitzman/drupal-test-traits) (DTT). All these types are tested in this repo. Some examples to try:
