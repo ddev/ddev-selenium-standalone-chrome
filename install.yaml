@@ -1,4 +1,4 @@
-name: addon-template
+name: ddev-selenium-standalone-chrome
 pre_install_actions:
 project_files:
 - docker-compose.selenium-chrome.yaml
