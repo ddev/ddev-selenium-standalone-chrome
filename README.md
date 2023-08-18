@@ -51,6 +51,25 @@ You can now connect to [DDEV SITE URL]:5900 (password: `secret`) in your VNC cli
 
 Note that when using `ports`, only one project at a time can be running with port 5900.
 
+### Behat config example
+
+If you use Behat as a test running, adjust your `behat.yml`
+
+```yml
+  extensions:
+    Behat\MinkExtension:
+      base_url: http://web
+      selenium2:
+        wd_host: http://selenium-chrome:4444/wd/hub
+        capabilities:
+          chrome:
+            switches:
+              - "--disable-gpu"
+              - "--headless"
+              - "--no-sandbox"
+              - "--disable-dev-shm-usage"
+```
+
 ## Contribute
 
 - Anyone is welcome to submit a PR to this repo. See README.md at https://github.com/ddev/ddev-addon-template, the parent of this repo.
