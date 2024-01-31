@@ -32,7 +32,7 @@ This service can be used with any project type. The examples below are Drupal-sp
 
 ### The easy way: Use noVNC (built-in)
 
-1. Remove --headless from the MINK_DRIVER_ARGS_WEBDRIVER in your project's .ddev/config.selenium-standalone-chrome.yaml. Run `ddev restart`.  
+1. Remove --headless from the MINK_DRIVER_ARGS_WEBDRIVER (or DTT_MINK_DRIVER_ARGS if using DTT) or in your project's .ddev/config.selenium-standalone-chrome.yaml. Run `ddev restart`.  
 2. On your host, browse to https://[DDEV SITE URL]:7900 (password: `secret`) to watch tests run with noVNC (neat!).
 
 This enables you to quickly see what is going on with your tests.
@@ -62,7 +62,7 @@ If you use Behat as a test running, adjust your `behat.yml`
 ```yml
   extensions:
     Behat\MinkExtension:
-      base_url: http://web
+      base_url: https://web
       selenium2:
         wd_host: http://selenium-chrome:4444/wd/hub
         capabilities:
@@ -70,8 +70,9 @@ If you use Behat as a test running, adjust your `behat.yml`
             switches:
               - "--disable-gpu"
               - "--headless"
-              - "--no-sandbox"
               - "--disable-dev-shm-usage"
+              - "--no-sandbox"
+              - "--ignore-certificate-errors"
 ```
 
 ## Contribute

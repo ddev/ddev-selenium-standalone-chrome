@@ -7,14 +7,14 @@
 web_environment:
   - BROWSERTEST_OUTPUT_DIRECTORY=/tmp
   - BROWSERTEST_OUTPUT_BASE_URL=${DDEV_PRIMARY_URL}
-  - SIMPLETEST_BASE_URL=http://web
+  - SIMPLETEST_BASE_URL=https://web
   - SIMPLETEST_DB=mysql://db:db@db/db
   # Use disable-dev-shm-usage instead of setting shm_usage
   # https://developers.google.com/web/tools/puppeteer/troubleshooting#tips
   # The format of chromeOptions is defined at https://chromedriver.chromium.org/capabilities
-  - MINK_DRIVER_ARGS_WEBDRIVER=[\"chrome\", {\"browserName\":\"chrome\",\"chromeOptions\":{\"w3c\":false,\"args\":[\"--disable-gpu\",\"--headless\", \"--no-sandbox\", \"--disable-dev-shm-usage\"]}}, \"http://selenium-chrome:4444/wd/hub\"]
+  - MINK_DRIVER_ARGS_WEBDRIVER=[\"chrome\", {\"browserName\":\"chrome\",\"chromeOptions\":{\"w3c\":false,\"args\":[\"--disable-gpu\",\"--headless\", \"--no-sandbox\", \"--disable-dev-shm-usage\", \"--ignore-certificate-errors\"]}}, \"http://selenium-chrome:4444/wd/hub\"]
   # Nightwatch
-  - DRUPAL_TEST_BASE_URL=http://web
+  - DRUPAL_TEST_BASE_URL=https://web
   - DRUPAL_TEST_DB_URL=mysql://db:db@db/db
   - DRUPAL_TEST_WEBDRIVER_HOSTNAME=selenium-chrome
   - DRUPAL_TEST_WEBDRIVER_PORT=4444
@@ -25,5 +25,5 @@ web_environment:
   - DRUPAL_NIGHTWATCH_IGNORE_DIRECTORIES=node_modules,vendor,.*,sites/*/files,sites/*/private,sites/simpletest
   - DRUPAL_NIGHTWATCH_OUTPUT=reports/nightwatch
   # DTT
-  - DTT_BASE_URL=http://web
-  - DTT_MINK_DRIVER_ARGS=[\"chrome\", {\"browserName\":\"chrome\",\"chromeOptions\":{\"w3c\":false,\"args\":[\"--disable-gpu\",\"--headless\", \"--no-sandbox\", \"--disable-dev-shm-usage\"]}}, \"http://selenium-chrome:4444/wd/hub\"]
+  - DTT_BASE_URL=https://web
+  - DTT_MINK_DRIVER_ARGS=[\"chrome\", {\"browserName\":\"chrome\",\"chromeOptions\":{\"w3c\":false,\"args\":[\"--disable-gpu\",\"--headless\", \"--no-sandbox\", \"--disable-dev-shm-usage\", \"--ignore-certificate-errors\"]}}, \"http://selenium-chrome:4444/wd/hub\"]
