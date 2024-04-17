@@ -9,7 +9,7 @@ setup() {
   cd "${TESTDIR}"
   composer -n --no-install create-project 'drupal/recommended-project:^10' .
   composer -n config --no-plugins allow-plugins true
-  composer -n require 'drupal/core-dev:^10' 'drush/drush:^12' 'phpspec/prophecy-phpunit:^2' 'weitzman/drupal-test-traits:2.0.0-rc1'
+  composer -n require 'drupal/core-dev:^10' 'drush/drush:^12' 'phpspec/prophecy-phpunit:^2' 'weitzman/drupal-test-traits:^2'
   ddev config --project-name=${PROJNAME} --php-version=8.1 --web-environment-add SYMFONY_DEPRECATIONS_HELPER=disabled
   ddev start -y >/dev/null
 }
