@@ -7,9 +7,9 @@ setup() {
   export DDEV_NON_INTERACTIVE=true
   ddev delete -Oy ${PROJNAME} >/dev/null 2>&1 || true
   cd "${TESTDIR}"
-  composer -n --no-install create-project 'drupal/recommended-project:^9' .
+  composer -n --no-install create-project 'drupal/recommended-project:^10' .
   composer -n config --no-plugins allow-plugins true
-  composer -n require 'drupal/core-dev:^9' 'drush/drush:^11' 'phpspec/prophecy-phpunit:^2' 'weitzman/drupal-test-traits:2.0.0-rc1'
+  composer -n require 'drupal/core-dev:^10' 'drush/drush:^12' 'phpspec/prophecy-phpunit:^2' 'weitzman/drupal-test-traits:^2'
   ddev config --project-name=${PROJNAME} --php-version=8.1 --web-environment-add SYMFONY_DEPRECATIONS_HELPER=disabled
   ddev start -y >/dev/null
 }
@@ -34,7 +34,7 @@ teardown() {
   echo "Run a Nightwatch test." >&3
   ddev exec -d /var/www/html/web/core yarn install
   ddev exec -d /var/www/html/web/core touch .env
-  ddev exec -d /var/www/html/web/core yarn test:nightwatch tests/Drupal/Nightwatch/Tests/exampleTest.js
+  ddev exec -d /var/www/html/web/core yarn test:nightwatch tests/Drupal/Nightwatch/Tests/jsOnceTest.js
   echo "Run a Nightwatch test that logs into Drupal." >&3
   ddev exec -d /var/www/html/web/core yarn test:nightwatch tests/Drupal/Nightwatch/Tests/loginTest.js
   echo "Install Drupal and run a DTT test." >&3
