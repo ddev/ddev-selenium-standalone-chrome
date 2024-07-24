@@ -33,7 +33,9 @@ This service can be used with any project type. The examples below are Drupal-sp
 ### The easy way: Use noVNC (built-in)
 
 1. Remove --headless from the MINK_DRIVER_ARGS_WEBDRIVER in your project's .ddev/config.selenium-standalone-chrome.yaml. Run `ddev restart`.
-2. On your host, run `ddev launch :7900` or browse to https://[DDEV SITE URL]:7900 (password: `secret`) to watch tests run with noVNC (neat!).
+2. On your host, run `ddev launch :7900` or browse to https://[DDEV SITE URL]:7900 to watch tests run with noVNC (neat!).
+
+By default noVNC connects without password, you can enable password by removing the "VNC_NO_PASSWORD=1" line in the file `docker-compose.selenium-chrome.yaml`, the default password will be `secret`, and you can set the custom one via `VNC_PASSWORD` environment variable.
 
 This enables you to quickly see what is going on with your tests.
 
