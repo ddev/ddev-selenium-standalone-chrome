@@ -28,7 +28,7 @@ ddev restart
 
 ### Optional steps
 
-1. Update the provided `.ddev/config.selenium-standalone-chrome.yaml` as you see fit(and remove the #ddev-generated line). You can also just override lines in your `.ddev/config.yaml`
+1. Update the provided `.ddev/config.selenium-standalone-chrome.yaml` as you see fit (and remove the #ddev-generated line). You can also just override lines in your `.ddev/config.yaml`
 1. Check `config.selenium-standalone-chrome.yaml` and `docker-compose.selenium-chrome.yaml` into your source control.
 1. Update by re-running `ddev add-on get ddev/ddev-selenium-standalone-chrome`.
 
