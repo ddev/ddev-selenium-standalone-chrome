@@ -8,11 +8,29 @@ This service can be used with any project type. The examples below are Drupal-sp
 
 ## Install/Update
 
-1. `ddev get ddev/ddev-selenium-standalone-chrome`
-2. `ddev restart`
-3. Optional. Update the provided .ddev/config.selenium-standalone-chrome.yaml as you see fit(and remove the #ddev-generated line). You can also just override lines in your .ddev/config.yaml
-4. Optional. Check config.selenium-standalone-chrome.yaml and docker-compose.selenium-chrome.yaml into your source control.
-5. Update by re-running `ddev get ddev/ddev-selenium-standalone-chrome`.
+For DDEV v1.23.5 or above run
+
+```sh
+ddev add-on get ddev/ddev-selenium-standalone-chrome
+```
+
+For earlier versions of DDEV run
+
+```sh
+ddev get ddev/ddev-selenium-standalone-chrome
+```
+
+Then restart your project
+
+```sh
+ddev restart
+```
+
+### Optional steps
+
+1. Update the provided `.ddev/config.selenium-standalone-chrome.yaml` as you see fit(and remove the #ddev-generated line). You can also just override lines in your `.ddev/config.yaml`
+1. Check `config.selenium-standalone-chrome.yaml` and `docker-compose.selenium-chrome.yaml` into your source control.
+1. Update by re-running `ddev add-on get ddev/ddev-selenium-standalone-chrome`.
 
 ## Use
 
