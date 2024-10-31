@@ -32,6 +32,28 @@ ddev restart
 1. Check `config.selenium-standalone-chrome.yaml` and `docker-compose.selenium-chrome.yaml` into your source control.
 1. Update by re-running `ddev add-on get ddev/ddev-selenium-standalone-chrome`.
 
+### Connecting to additional hostnames
+
+If you have declared `additional_hostnames` in `.ddev/config.yaml` these must be added as `external_links` to `selenium-chrome` to prevent `unknown error: net::ERR_CONNECTION_REFUSED`.
+
+1. Create a new docker compose yaml file in the `.ddev` folder eg `docker-compose.additional-hostnames.yaml`.
+2. Declare the additional hostnames as `external_links` in the yaml file you created. For example:
+
+If your additional_hostnames in your `config.yaml` file are:
+```yaml
+additional_hostnames:
+  - sub-a.site-name
+  - another-name
+```
+Your `docker-compose.additional-hostnames.yaml` would look like:
+```yaml
+services:
+  selenium-chrome:
+    external_links:
+      - ddev-router:sub-a.site-name.${DDEV_TLD}
+      - ddev-router:another-name.${DDEV_TLD}
+```
+
 ## Use
 
 - Your project is now ready to run FunctionalJavascript and [Nightwatch](https://www.drupal.org/docs/automated-testing/javascript-testing-using-nightwatch) tests from Drupal core, or [Drupal Test Traits](https://gitlab.com/weitzman/drupal-test-traits) (DTT). All these types are tested in this repo. Some examples to try:
