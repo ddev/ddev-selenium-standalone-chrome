@@ -40,7 +40,7 @@ ddev restart
 - Your project is now ready to run FunctionalJavascript and [Nightwatch](https://www.drupal.org/docs/automated-testing/javascript-testing-using-nightwatch) tests from Drupal core, or [Drupal Test Traits](https://gitlab.com/weitzman/drupal-test-traits) (DTT). All these types are tested in this repo. Some examples to try:
   - FunctionalJavascript:
     - Ensure you have the `drupal/core-dev` Composer package or equivalent.
-    - `ddev exec -d /var/www/html/web "../vendor/bin/phpunit -v -c ./core/phpunit.xml.dist ./core/modules/system/tests/src/FunctionalJavascript/FrameworkTest.php"`
+    - `ddev exec -d /var/www/html/web "../vendor/bin/phpunit -c ./core/phpunit.xml.dist ./core/modules/system/tests/src/FunctionalJavascript/FrameworkTest.php"`
   - Nightwatch
     - `ddev exec -d /var/www/html/web/core yarn install` (do this once)
     - `ddev exec -d /var/www/html/web/core touch .env` (do this once)
