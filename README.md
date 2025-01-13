@@ -26,6 +26,9 @@ Then restart your project
 ddev restart
 ```
 
+> [!NOTE]
+> If you change `additional_hostnames` or `additional_fqdns`, you have to re-run `ddev add-on get ddev/ddev-selenium-standalone-chrome`
+
 ### Optional steps
 
 1. Update the provided `.ddev/config.selenium-standalone-chrome.yaml` as you see fit (and remove the #ddev-generated line). You can also just override lines in your `.ddev/config.yaml`
