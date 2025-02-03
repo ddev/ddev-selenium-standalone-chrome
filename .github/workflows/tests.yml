@@ -40,21 +40,21 @@ jobs:
         addon_ref: ${{ env.GITHUB_REF }}
 
     - name: Archive browser_output
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: browser_output
         path: |
           web/sites/simpletest/browser_output
 
     - name: Archive junits
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: junits
         path: |
           *.junit.xml
 
     - name: Nightwatch reports
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: nightwatch
         path: |
