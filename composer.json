@@ -1,0 +1,34 @@
+{
+    "name": "ddev/ddev-selenium-standalone-chrome",
+    "conflict": {
+        "drupal/core": "< 11.1"
+    },
+    "require-dev": {
+        "drupal/core-dev": "^11.1",
+        "drupal/core-composer-scaffold": "^11.1",
+        "drupal/core-recommended": "^11.1",
+        "composer/installers": "^2"
+    },
+    "extra": {
+        "installer-paths": {
+            "web/core": ["type:drupal-core"],
+            "web/libraries/{$name}": ["type:drupal-library"],
+            "web/modules/unish/{$name}": ["drupal/devel"],
+            "web/themes/unish/{$name}": ["drupal/empty_theme"],
+            "web/modules/contrib/{$name}": ["type:drupal-module"],
+            "web/profiles/contrib/{$name}": ["type:drupal-profile"],
+            "web/themes/contrib/{$name}": ["type:drupal-theme"]
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "drupal/core-composer-scaffold": true,
+            "drupal/core-project-message": true,
+            "php-http/discovery": true,
+            "phpstan/extension-installer": true,
+            "tbachert/spi": true
+        }
+    }
+}
