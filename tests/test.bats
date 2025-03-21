@@ -30,7 +30,7 @@ teardown() {
   ddev exec ls
   ddev exec "curl -v selenium-chrome:4444/wd/hub/status"
   echo "Run a FunctionalJavascript test." >&3
-  ddev exec -d /var/www/html/web "../vendor/bin/phpunit -v -c ./core/phpunit.xml.dist ./core/modules/system/tests/src/FunctionalJavascript/FrameworkTest.php"
+  ddev exec -d /var/www/html/web "../vendor/bin/phpunit -c ./core/phpunit.xml.dist ./core/modules/system/tests/src/FunctionalJavascript/FrameworkTest.php"
   echo "Run a Nightwatch test." >&3
   ddev exec -d /var/www/html/web/core yarn install
   ddev exec -d /var/www/html/web/core touch .env
