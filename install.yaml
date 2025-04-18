@@ -4,6 +4,8 @@ project_files:
 - docker-compose.selenium-chrome.yaml
 - config.selenium-standalone-chrome.yaml
 
+ddev_version_constraint: '>= v1.24.3'
+
 post_install_actions:
   - |
     #ddev-nodisplay
@@ -25,6 +27,7 @@ post_install_actions:
           - "ddev-router:{{- replace (env "DDEV_TLD") "\\${DDEV_TLD}" (replace (env "DDEV_PROJECT") "\\${DDEV_PROJECT}" $n) -}}"
         {{- end }}
     END
+
 removal_actions:
   - |
     #ddev-nodisplay

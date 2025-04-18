@@ -1,33 +1,25 @@
-[![tests](https://github.com/ddev/ddev-selenium-standalone-chrome/actions/workflows/tests.yml/badge.svg)](https://github.com/ddev/ddev-addon-template/actions/workflows/tests.yml) ![project is maintained](https://img.shields.io/maintenance/yes/2025.svg)
+[![add-on registry](https://img.shields.io/badge/DDEV-Add--on_Registry-blue)](https://addons.ddev.com)
+[![tests](https://github.com/ddev/ddev-selenium-standalone-chrome/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/ddev/ddev-selenium-standalone-chrome/actions/workflows/tests.yml?query=branch%3Amain)
+[![last commit](https://img.shields.io/github/last-commit/ddev/ddev-selenium-standalone-chrome)](https://github.com/ddev/ddev-selenium-standalone-chrome/commits)
+[![release](https://img.shields.io/github/v/release/ddev/ddev-selenium-standalone-chrome)](https://github.com/ddev/ddev-selenium-standalone-chrome/releases/latest)
 
 # DDEV Selenium Standalone Chrome
 
-## Introduction
+## Overview
 
 This service can be used with any project type. The examples below are Drupal-specific. Contributions for docs and tests that show this service working with other project types are appreciated.
 
-## Install/Update
+## Installation
 
-For DDEV v1.23.5 or above run
-
-```sh
+```bash
 ddev add-on get ddev/ddev-selenium-standalone-chrome
-```
-
-For earlier versions of DDEV run
-
-```sh
-ddev get ddev/ddev-selenium-standalone-chrome
-```
-
-Then restart your project
-
-```sh
 ddev restart
 ```
 
 > [!NOTE]
-> If you change `additional_hostnames` or `additional_fqdns`, you have to re-run `ddev add-on get ddev/ddev-selenium-standalone-chrome`
+> Run `ddev add-on get ddev/ddev-selenium-standalone-chrome` after changes to `name`, `additional_hostnames`, `additional_fqdns`, or `project_tld` in `.ddev/config.yaml` so that `.ddev/docker-compose.selenium-chrome_extras.yaml` is regenerated.
+
+After installation, make sure to commit the `.ddev` directory to version control.
 
 ### Optional steps
 
@@ -35,7 +27,7 @@ ddev restart
 1. Check `config.selenium-standalone-chrome.yaml` and `docker-compose.selenium-chrome.yaml` into your source control.
 1. Update by re-running `ddev add-on get ddev/ddev-selenium-standalone-chrome`.
 
-## Use
+## Usage
 
 - Your project is now ready to run FunctionalJavascript and [Nightwatch](https://www.drupal.org/docs/automated-testing/javascript-testing-using-nightwatch) tests from Drupal core, or [Drupal Test Traits](https://gitlab.com/weitzman/drupal-test-traits) (DTT). All these types are tested in this repo. Some examples to try:
   - FunctionalJavascript:
@@ -53,10 +45,10 @@ ddev restart
 
 ### The easy way: Use noVNC (built-in)
 
-1. Remove --headless from the MINK_DRIVER_ARGS_WEBDRIVER in your project's .ddev/config.selenium-standalone-chrome.yaml. Run `ddev restart`.
-2. On your host, run `ddev launch :7900` or browse to https://[DDEV SITE URL]:7900 to watch tests run with noVNC (neat!).
+1. Remove `--headless` from the `MINK_DRIVER_ARGS_WEBDRIVER` in your project's `.ddev/config.selenium-standalone-chrome.yaml`. Run `ddev restart`.
+2. On your host, run `ddev launch :7900` or browse to `https://[DDEV SITE URL]:7900` to watch tests run with noVNC (neat!).
 
-By default noVNC connects without password, you can enable password by removing the "VNC_NO_PASSWORD=1" line in the file `docker-compose.selenium-chrome.yaml`, the default password will be `secret`, and you can set the custom one via `VNC_PASSWORD` environment variable.
+By default noVNC connects without password, you can enable password by removing the `VNC_NO_PASSWORD=1` line in the file `docker-compose.selenium-chrome.yaml`, the default password will be `secret`, and you can set the custom one via `VNC_PASSWORD` environment variable.
 
 This enables you to quickly see what is going on with your tests.
 
@@ -74,7 +66,7 @@ If you want to use the browser provided by this addon to check out the test resu
 2. Uncomment the two lines about `ports` and `5900:5900`.
 3. Execute `ddev restart`.
 
-You can now connect to [DDEV SITE URL]:5900 (password: `secret`) in your VNC client.
+You can now connect to `[DDEV SITE URL]:5900` (password: `secret`) in your VNC client.
 
 Note that when using `ports`, only one project at a time can be running with port 5900.
 
@@ -82,7 +74,7 @@ Note that when using `ports`, only one project at a time can be running with por
 
 If you use Behat as a test running, adjust your `behat.yml`
 
-```yml
+```yaml
   extensions:
     Behat\MinkExtension:
       base_url: http://web
@@ -101,6 +93,6 @@ If you use Behat as a test running, adjust your `behat.yml`
 
 - Anyone is welcome to submit a PR to this repo. See README.md at https://github.com/ddev/ddev-addon-template, the parent of this repo.
 
-## Maintainer
+## Credits
 
-- Contributed and maintained by [@weitzman](https://github.com/weitzman).
+**Contributed and maintained by [@weitzman](https://github.com/weitzman)**
