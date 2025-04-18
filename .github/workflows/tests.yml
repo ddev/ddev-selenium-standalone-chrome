@@ -5,19 +5,21 @@ on:
     branches: [ main ]
 
   schedule:
-  - cron: '01 07 * * *'
+  - cron: '25 08 * * *'
 
   workflow_dispatch:
     inputs:
       debug_enabled:
-        description: 'Debug with tmate set "debug_enabled"'
+        type: boolean
+        description: Debug with tmate
         required: false
-        default: "false"
+        default: false
 
-env:
-  # Allow ddev get to use a github token to prevent rate limiting by tests
-  DDEV_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
+# This is required for "gautamkrishnar/keepalive-workflow", see "ddev/github-action-add-on-test"
 permissions:
   actions: write
 
@@ -31,31 +33,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: ddev/github-action-add-on-test@v2
-      with:
-        ddev_version: ${{ matrix.ddev_version }}
-        token: ${{ secrets.GITHUB_TOKEN }}
-        debug_enabled: ${{ github.event.inputs.debug_enabled }}
-        addon_repository: ${{ env.GITHUB_REPOSITORY }}
-        addon_ref: ${{ env.GITHUB_REF }}
+      - uses: ddev/github-action-add-on-test@v2
+        with:
+          ddev_version: ${{ matrix.ddev_version }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          debug_enabled: ${{ github.event.inputs.debug_enabled }}
+          addon_repository: ${{ env.GITHUB_REPOSITORY }}
+          addon_ref: ${{ env.GITHUB_REF }}
 
-    - name: Archive browser_output
-      uses: actions/upload-artifact@v4
-      with:
-        name: browser_output
-        path: |
-          web/sites/simpletest/browser_output
+      - name: Archive browser_output
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser_output
+          path: |
+            web/sites/simpletest/browser_output
 
-    - name: Archive junits
-      uses: actions/upload-artifact@v4
-      with:
-        name: junits
-        path: |
-          *.junit.xml
+      - name: Archive junits
+        uses: actions/upload-artifact@v4
+        with:
+          name: junits
+          path: |
+            *.junit.xml
 
-    - name: Nightwatch reports
-      uses: actions/upload-artifact@v4
-      with:
-        name: nightwatch
-        path: |
-          web/core/reports/nightwatch
+      - name: Nightwatch reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: nightwatch
+          path: |
+            web/core/reports/nightwatch
