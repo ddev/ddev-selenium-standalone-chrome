@@ -25,6 +25,8 @@ services:
       com.ddev.site-name: ${DDEV_SITENAME}
       com.ddev.approot: $DDEV_APPROOT
     volumes:
+      # To enable file uploads in E2E tests.
+      - ${DDEV_APPROOT}:/var/www/html:r
       - ".:/mnt/ddev_config"
 
   web:
