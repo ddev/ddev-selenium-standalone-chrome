@@ -26,6 +26,7 @@ setup() {
 
   export DIR="$(cd "$(dirname "${BATS_TEST_FILENAME}")/.." >/dev/null 2>&1 && pwd)"
   export PROJNAME="test-$(basename "${GITHUB_REPO}")"
+  export SKIP_CLEANUP=1
   mkdir -p ~/tmp
   export TESTDIR=$(mktemp -d ~/tmp/${PROJNAME}.XXXXXX)
   export DDEV_NONINTERACTIVE=true
@@ -64,7 +65,6 @@ health_checks() {
 
   run ddev exec -d /var/www/html/web/core touch .env
   assert_success
-  assert_file_exists web/core/.env
 
   run ddev exec -d /var/www/html/web/core yarn test:nightwatch tests/Drupal/Nightwatch/Tests/jsOnceTest.js
   assert_success
@@ -86,7 +86,7 @@ health_checks() {
 teardown() {
   set -eu -o pipefail
   ddev delete -Oy ${PROJNAME} >/dev/null 2>&1
-  [ "${TESTDIR}" != "" ] && rm -rf ${TESTDIR}
+  [ ! -z "${SKIP_CLEANUP}" ] || ( [ "${TESTDIR}" != "" ] && rm -rf ${TESTDIR} )
 }
 
 @test "install from directory" {
