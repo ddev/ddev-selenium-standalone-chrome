@@ -58,6 +58,10 @@ health_checks() {
   run ddev exec -d /var/www/html/web "../vendor/bin/phpunit -v -c ./core/phpunit.xml.dist ./core/modules/system/tests/src/FunctionalJavascript/FrameworkTest.php"
   assert_success
 
+  echo "Ensure file uploads from browser works." >&3
+  run ddev exec -d /var/www/html/web "../vendor/bin/phpunit -v -c ./core/phpunit.xml.dist ./core/modules/file/tests/src/FunctionalJavascript/FileManagedFileElementTest.php"
+  assert_success
+
   echo "Run a Nightwatch test." >&3
 
   run ddev exec -d /var/www/html/web/core yarn install
