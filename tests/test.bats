@@ -29,6 +29,8 @@ setup() {
   export SKIP_CLEANUP=1
   mkdir -p ~/tmp
   export TESTDIR=$(mktemp -d ~/tmp/${PROJNAME}.XXXXXX)
+  # Persist TESTDIR when in Github Actions for later steps (artifacts).
+  [ -z "${GITHUB_ENV}" ] || "TESTDIR=$TESTDIR" >> "$GITHUB_ENV"
   export DDEV_NONINTERACTIVE=true
   export DDEV_NO_INSTRUMENTATION=true
   ddev delete -Oy "${PROJNAME}" >/dev/null 2>&1 || true

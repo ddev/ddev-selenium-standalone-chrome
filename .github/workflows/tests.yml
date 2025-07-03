@@ -49,18 +49,18 @@ jobs:
         with:
           name: browser_output
           path: |
-            web/sites/simpletest/browser_output
+            ${{ env.TESTDIR }}/web/sites/simpletest/browser_output
 
       - name: Archive junits
         uses: actions/upload-artifact@v4
         with:
           name: junits
           path: |
-            *.junit.xml
+            ${{ env.TESTDIR }}/web/*.junit.xml
 
       - name: Nightwatch reports
         uses: actions/upload-artifact@v4
         with:
           name: nightwatch
           path: |
-            web/core/reports/nightwatch
+            ${{ env.TESTDIR }}/web/core/reports/nightwatch
