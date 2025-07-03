@@ -34,6 +34,9 @@ jobs:
 
     steps:
       - uses: ddev/github-action-add-on-test@v2
+        env:
+          # Ensure that browser_output, junit, Nightwatch report are available as artifacts.
+          SKIP_CLEANUP: "true"
         with:
           ddev_version: ${{ matrix.ddev_version }}
           token: ${{ secrets.GITHUB_TOKEN }}
