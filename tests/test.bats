@@ -59,7 +59,7 @@ health_checks() {
 
   echo "Ensure file uploads from browser works." >&3
   run ddev exec -d /var/www/html/web "../vendor/bin/phpunit -v -c ./core/phpunit.xml.dist ./core/modules/file/tests/src/FunctionalJavascript/FileManagedFileElementTest.php"
-  assert_failure
+  assert_success
 
   echo "Run a Nightwatch test." >&3
 
@@ -99,16 +99,6 @@ teardown() {
 }
 
 @test "install from directory" {
-  set -eu -o pipefail
-  echo "# ddev add-on get ${DIR} with project ${PROJNAME} in $(pwd)" >&3
-  run ddev add-on get "${DIR}"
-  assert_success
-  run ddev restart -y
-  assert_success
-  health_checks
-}
-
-@test "install from directory 2" {
   set -eu -o pipefail
   echo "# ddev add-on get ${DIR} with project ${PROJNAME} in $(pwd)" >&3
   run ddev add-on get "${DIR}"

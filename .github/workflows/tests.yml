@@ -41,7 +41,8 @@ jobs:
           addon_repository: ${{ env.GITHUB_REPOSITORY }}
           addon_ref: ${{ env.GITHUB_REF }}
 
-      - name: Zip Nightwatch reports
+      # The path for one of the files in artifact is not valid
+      - name: Zip artifacts that can't be processed by actions/upload-artifact
         if: always()
         run: |
           for d in ${{ env.TESTDIR }}*/; do
@@ -50,7 +51,7 @@ jobs:
             fi
           done
 
-      - name: Upload artifact
+      - name: Upload artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
