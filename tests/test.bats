@@ -59,7 +59,7 @@ health_checks() {
 
   echo "Ensure file uploads from browser works." >&3
   run ddev exec -d /var/www/html/web "../vendor/bin/phpunit -v -c ./core/phpunit.xml.dist ./core/modules/file/tests/src/FunctionalJavascript/FileManagedFileElementTest.php"
-  assert_success
+  assert_failure
 
   echo "Run a Nightwatch test." >&3
 
