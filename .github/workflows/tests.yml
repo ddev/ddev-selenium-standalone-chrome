@@ -34,9 +34,6 @@ jobs:
 
     steps:
       - uses: ddev/github-action-add-on-test@v2
-        env:
-          # Ensure that browser_output, junit, Nightwatch report are available as artifacts.
-          SKIP_CLEANUP: "true"
         with:
           ddev_version: ${{ matrix.ddev_version }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -44,23 +41,28 @@ jobs:
           addon_repository: ${{ env.GITHUB_REPOSITORY }}
           addon_ref: ${{ env.GITHUB_REF }}
 
-#      - name: Archive browser_output
-#        uses: actions/upload-artifact@v4
-#        with:
-#          name: browser_output
-#          path: |
-#            ${{ env.TESTDIR }}/web/sites/simpletest/browser_output
+      - name: Archive browser_output
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser_output-${{ matrix.ddev_version }}
+          path: |
+            ${{ env.TESTDIR }}/web/sites/simpletest/browser_output
 
       - name: Archive junits
         uses: actions/upload-artifact@v4
         with:
-          name: junits
+          name: junits-${{ matrix.ddev_version }}
           path: |
             ${{ env.TESTDIR }}/web/*.junit.xml
+
+      - name: Zip Nightwatch reports
+        run: |
+          cd ${{ env.TESTDIR }}/web/core/reports
+          zip -r nightwatch.zip nightwatch
 
       - name: Nightwatch reports
         uses: actions/upload-artifact@v4
         with:
-          name: nightwatch
+          name: nightwatch-${{ matrix.ddev_version }}
           path: |
-            ${{ env.TESTDIR }}/web/core/reports/nightwatch
+            ${{ env.TESTDIR }}/web/core/reports/nightwatch.zip

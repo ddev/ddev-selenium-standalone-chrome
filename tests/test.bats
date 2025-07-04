@@ -26,11 +26,8 @@ setup() {
 
   export DIR="$(cd "$(dirname "${BATS_TEST_FILENAME}")/.." >/dev/null 2>&1 && pwd)"
   export PROJNAME="test-$(basename "${GITHUB_REPO}")"
-  export SKIP_CLEANUP=1
   mkdir -p ~/tmp
   export TESTDIR=$(mktemp -d ~/tmp/${PROJNAME}.XXXXXX)
-  # Persist TESTDIR when in Github Actions for later steps (artifacts).
-  [ -z "${GITHUB_ENV:-}" ] || echo "TESTDIR=${TESTDIR}" >> "${GITHUB_ENV}"
   export DDEV_NONINTERACTIVE=true
   export DDEV_NO_INSTRUMENTATION=true
   ddev delete -Oy "${PROJNAME}" >/dev/null 2>&1 || true
@@ -92,7 +89,13 @@ health_checks() {
 teardown() {
   set -eu -o pipefail
   ddev delete -Oy ${PROJNAME} >/dev/null 2>&1
-  [ ! -z "${SKIP_CLEANUP}" ] || ( [ "${TESTDIR}" != "" ] && rm -rf ${TESTDIR} )
+  # Persist TESTDIR if running inside GitHub Actions. Useful for uploading test result artifacts
+  # See example at https://github.com/ddev/github-action-add-on-test#preserving-artifacts
+  if [ -n "${GITHUB_ENV:-}" ]; then
+    echo "TESTDIR=${TESTDIR}" >> "${GITHUB_ENV}"
+  else
+    [ "${TESTDIR}" != "" ] && rm -rf "${TESTDIR}"
+  fi
 }
 
 @test "install from directory" {
