@@ -95,4 +95,5 @@ If you use Behat as a test running, adjust your `behat.yml`
 
 ## Credits
 
-**Contributed and maintained by [@weitzman](https://github.com/weitzman)**
+Contributed and maintained by Moshe Weitzman ([@weitzman](https://github.com/weitzman)) and
+Dezső BICZÓ  ([@mxr576](https://github.com/mxr576))
