@@ -41,28 +41,19 @@ jobs:
           addon_repository: ${{ env.GITHUB_REPOSITORY }}
           addon_ref: ${{ env.GITHUB_REF }}
 
-      - name: Archive browser_output
-        uses: actions/upload-artifact@v4
-        with:
-          name: browser_output-${{ matrix.ddev_version }}
-          path: |
-            ${{ env.TESTDIR }}/web/sites/simpletest/browser_output
-
-      - name: Archive junits
-        uses: actions/upload-artifact@v4
-        with:
-          name: junits-${{ matrix.ddev_version }}
-          path: |
-            ${{ env.TESTDIR }}/web/*.junit.xml
-
       - name: Zip Nightwatch reports
         run: |
-          cd ${{ env.TESTDIR }}/web/core/reports
-          zip -r nightwatch.zip nightwatch
+          for d in ${{ env.TESTDIR }}*/; do
+            if [ -d "$d/web/core/reports/nightwatch" ]; then
+              (cd "$d/web/core/reports" && zip -r nightwatch.zip nightwatch)
+            fi
+          done
 
-      - name: Nightwatch reports
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: nightwatch-${{ matrix.ddev_version }}
+          name: artifact-${{ matrix.ddev_version }}
           path: |
-            ${{ env.TESTDIR }}/web/core/reports/nightwatch.zip
+            ${{ env.TESTDIR }}*/web/sites/simpletest/browser_output
+            ${{ env.TESTDIR }}*/web/*.junit.xml
+            ${{ env.TESTDIR }}*/web/core/reports/nightwatch.zip
