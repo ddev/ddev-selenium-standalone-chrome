@@ -42,6 +42,7 @@ jobs:
           addon_ref: ${{ env.GITHUB_REF }}
 
       - name: Zip Nightwatch reports
+        if: always()
         run: |
           for d in ${{ env.TESTDIR }}*/; do
             if [ -d "$d/web/core/reports/nightwatch" ]; then
@@ -50,6 +51,7 @@ jobs:
           done
 
       - name: Upload artifact
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: artifact-${{ matrix.ddev_version }}
