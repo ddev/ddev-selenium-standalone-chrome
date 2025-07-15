@@ -37,7 +37,7 @@ setup() {
   composer -n config --no-plugins allow-plugins true
   composer -n require 'drupal/core-dev:^11' 'drush/drush:^13' 'weitzman/drupal-test-traits:^2'
 
-  run ddev config --project-name=${PROJNAME} --project-tld=ddev.site --php-version=8.3 --web-environment-add=SYMFONY_DEPRECATIONS_HELPER=disabled
+  run ddev config --project-name=${PROJNAME} --project-tld=ddev.site --php-version=8.4 --web-environment-add=SYMFONY_DEPRECATIONS_HELPER=disabled
   assert_success
   run ddev start -y
   assert_success
@@ -82,7 +82,7 @@ health_checks() {
   run ddev exec -d /var/www/html/web "../vendor/bin/drush si -y --account-name=admin --account-pass=password standard"
   assert_success
 
-  run ddev exec -d /var/www/html/web "../vendor/bin/phpunit --log-junit dtt.junit.xml --bootstrap=../vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php --printer '\Drupal\Tests\Listeners\HtmlOutputPrinter' ../vendor/weitzman/drupal-test-traits/tests/ExampleSelenium2DriverTest.php"
+  run ddev exec -d /var/www/html/web "../vendor/bin/phpunit --log-junit dtt.junit.xml --bootstrap=../vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php ../vendor/weitzman/drupal-test-traits/tests/ExampleSelenium2DriverTest.php"
   assert_success
 }
 
