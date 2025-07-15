@@ -33,11 +33,11 @@ setup() {
   ddev delete -Oy "${PROJNAME}" >/dev/null 2>&1 || true
   cd "${TESTDIR}"
 
-  composer -n --no-install create-project 'drupal/recommended-project:^10' .
+  composer -n --no-install create-project 'drupal/recommended-project:^11' .
   composer -n config --no-plugins allow-plugins true
-  composer -n require 'drupal/core-dev:^10' 'drush/drush:^12' 'phpspec/prophecy-phpunit:^2' 'weitzman/drupal-test-traits:^2'
+  composer -n require 'drupal/core-dev:^11' 'drush/drush:^13' 'weitzman/drupal-test-traits:^2'
 
-  run ddev config --project-name=${PROJNAME} --project-tld=ddev.site --php-version=8.1 --web-environment-add=SYMFONY_DEPRECATIONS_HELPER=disabled
+  run ddev config --project-name=${PROJNAME} --project-tld=ddev.site --php-version=8.4 --web-environment-add=SYMFONY_DEPRECATIONS_HELPER=disabled
   assert_success
   run ddev start -y
   assert_success
@@ -54,11 +54,11 @@ health_checks() {
 
   echo "Run a FunctionalJavascript test." >&3
 
-  run ddev exec -d /var/www/html/web "../vendor/bin/phpunit -v -c ./core/phpunit.xml.dist ./core/modules/system/tests/src/FunctionalJavascript/FrameworkTest.php"
+  run ddev exec -d /var/www/html/web "../vendor/bin/phpunit -c ./core/phpunit.xml.dist ./core/modules/system/tests/src/FunctionalJavascript/FrameworkTest.php"
   assert_success
 
   echo "Ensure file uploads from browser works." >&3
-  run ddev exec -d /var/www/html/web "../vendor/bin/phpunit -v -c ./core/phpunit.xml.dist ./core/modules/file/tests/src/FunctionalJavascript/FileManagedFileElementTest.php"
+  run ddev exec -d /var/www/html/web "../vendor/bin/phpunit -c ./core/phpunit.xml.dist ./core/modules/file/tests/src/FunctionalJavascript/FileManagedFileElementTest.php"
   assert_success
 
   echo "Run a Nightwatch test." >&3
@@ -82,7 +82,7 @@ health_checks() {
   run ddev exec -d /var/www/html/web "../vendor/bin/drush si -y --account-name=admin --account-pass=password standard"
   assert_success
 
-  run ddev exec -d /var/www/html/web "../vendor/bin/phpunit --log-junit dtt.junit.xml --bootstrap=../vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php --printer '\Drupal\Tests\Listeners\HtmlOutputPrinter' ../vendor/weitzman/drupal-test-traits/tests/ExampleSelenium2DriverTest.php"
+  run ddev exec -d /var/www/html/web "../vendor/bin/phpunit --log-junit dtt.junit.xml --bootstrap=../vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php ../vendor/weitzman/drupal-test-traits/tests/ExampleSelenium2DriverTest.php"
   assert_success
 }
 
