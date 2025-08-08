@@ -35,7 +35,7 @@ setup() {
 
   composer -n --no-install create-project 'drupal/recommended-project:^11' .
   composer -n config --no-plugins allow-plugins true
-  composer -n require 'drupal/core-dev:^11' 'drush/drush:^13' 'weitzman/drupal-test-traits:^2'
+  composer -n require 'drupal/core-dev:^11' 'drush/drush:^13' 'weitzman/drupal-test-traits:^2' -W
 
   run ddev config --project-name=${PROJNAME} --project-tld=ddev.site --php-version=8.4 --web-environment-add=SYMFONY_DEPRECATIONS_HELPER=disabled
   assert_success
