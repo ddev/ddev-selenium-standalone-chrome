@@ -7,6 +7,8 @@
 
 ## Overview
 
+Makes it easy to run Functional, FunctionalJavascript, and Nightwatch tests in DDEV. 
+
 This service can be used with any project type. The examples below are Drupal-specific. Contributions for docs and tests that show this service working with other project types are appreciated.
 
 ## Installation
@@ -14,6 +16,10 @@ This service can be used with any project type. The examples below are Drupal-sp
 ```bash
 ddev add-on get ddev/ddev-selenium-standalone-chrome
 ddev restart
+```
+Functional and FunctionalJavascript tests require the `drupal/core-dev` Composer package or equivalent:
+```bash
+ddev composer require drupal/core-dev
 ```
 
 > [!NOTE]
@@ -29,9 +35,10 @@ After installation, make sure to commit the `.ddev` directory to version control
 
 ## Usage
 
-- Your project is now ready to run FunctionalJavascript and [Nightwatch](https://www.drupal.org/docs/automated-testing/javascript-testing-using-nightwatch) tests from Drupal core, or [Drupal Test Traits](https://gitlab.com/weitzman/drupal-test-traits) (DTT). All these types are tested in this repo. Some examples to try:
+- Your project is now ready to run [Functional](https://mglaman.dev/blog/do-you-need-functional-test), FunctionalJavascript and [Nightwatch](https://www.drupal.org/docs/automated-testing/javascript-testing-using-nightwatch) tests from Drupal core, or [Drupal Test Traits](https://git.drupalcode.org/project/dtt) (DTT). Some examples to try:
+  - Functional:
+    - `ddev exec -d /var/www/html/web "../vendor/bin/phpunit -c ./core/phpunit.xml.dist ./core/modules/migrate/tests/src/Functional/process/DownloadFunctionalTest.php"`
   - FunctionalJavascript:
-    - Ensure you have the `drupal/core-dev` Composer package or equivalent.
     - `ddev exec -d /var/www/html/web "../vendor/bin/phpunit -c ./core/phpunit.xml.dist ./core/modules/system/tests/src/FunctionalJavascript/FrameworkTest.php"`
   - Nightwatch
     - `ddev exec -d /var/www/html/web/core yarn install` (do this once)
