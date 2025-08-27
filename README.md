@@ -7,7 +7,7 @@
 
 ## Overview
 
-Makes it super easy to run Functional, FunctionalJavascript, and Nightwatch tests in DDEV. You can follow along in the browser via noVNC.
+Makes it easy to run Functional, FunctionalJavascript, and Nightwatch tests in DDEV. 
 
 This service can be used with any project type. The examples below are Drupal-specific. Contributions for docs and tests that show this service working with other project types are appreciated.
 
