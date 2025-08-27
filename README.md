@@ -17,7 +17,7 @@ This service can be used with any project type. The examples below are Drupal-sp
 ddev add-on get ddev/ddev-selenium-standalone-chrome
 ddev restart
 ```
-Functional and FunctionalJavascript requires `drupal/core-dev` Composer package or equivalent:
+Functional and FunctionalJavascript tests require the `drupal/core-dev` Composer package or equivalent:
 ```bash
 ddev composer require drupal/core-dev
 ```
