@@ -12,6 +12,11 @@
 # For debugging:
 #   bats ./tests/test.bats --show-output-of-passing-tests --verbose-run --print-output-on-failure
 
+bats::on_failure() {
+    echo "Test failed, running debug commands..."
+    ddev logs -s selenium-chrome
+}
+
 setup() {
   set -eu -o pipefail
 
@@ -107,3 +112,4 @@ teardown() {
   assert_success
   health_checks
 }
+
