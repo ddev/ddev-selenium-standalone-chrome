@@ -19,7 +19,7 @@ services:
       - VNC_NO_PASSWORD=1
         # Enables multiple parallel connections to the Selenium.
       - SE_NODE_MAX_SESSIONS=12
-      - SE_NODE_OVERRIDE_MAX_SESSIONS=true      
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
     # To enable VNC access for traditional VNC clients like macOS "Screen Sharing",
     # uncomment the following two lines.
     #ports:
@@ -31,7 +31,3 @@ services:
       # To enable file uploads in E2E tests.
       - ${DDEV_APPROOT}:/var/www/html:r
       - ".:/mnt/ddev_config"
-
-  web:
-    links:
-      - selenium-chrome

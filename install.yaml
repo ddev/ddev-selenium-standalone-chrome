@@ -8,31 +8,14 @@ ddev_version_constraint: '>= v1.24.10'
 
 post_install_actions:
   - |
-    #ddev-description:Checking docker-compose.selenium-chrome_extras.yaml for changes
-    if [ -f docker-compose.selenium-chrome_extras.yaml ] && ! grep -q '#ddev-generated' docker-compose.selenium-chrome_extras.yaml; then
-      echo "Existing docker-compose.selenium-chrome_extras.yaml does not have #ddev-generated, so can't be updated"
-      exit 2
-    fi
-  - |
-    #ddev-description:Adding all hostnames to the selenium-chrome container to make them available
-    cat <<-END >docker-compose.selenium-chrome_extras.yaml
-    #ddev-generated
-    services:
-      selenium-chrome:
-        external_links:
-        {{- $selenium_chrome_hostnames := splitList "," (env "DDEV_HOSTNAME") -}}
-        {{- range $i, $n := $selenium_chrome_hostnames }}
-          - "ddev-router:{{- replace (env "DDEV_TLD") "\\${DDEV_TLD}" (replace (env "DDEV_PROJECT") "\\${DDEV_PROJECT}" $n) -}}"
-        {{- end }}
-    END
-
-removal_actions:
-  - |
-    #ddev-description:Remove docker-compose.selenium-chrome_extras.yaml file
-    if [ -f docker-compose.selenium-chrome_extras.yaml ]; then
-      if grep -q '#ddev-generated' docker-compose.selenium-chrome_extras.yaml; then
-        rm -f docker-compose.selenium-chrome_extras.yaml
+    #ddev-description:Checking for obsolete docker-compose.selenium-chrome_extras.yaml
+    file="$DDEV_APPROOT/.ddev/docker-compose.selenium-chrome_extras.yaml"
+    if [ -f "$file" ]; then
+      if grep -q '#ddev-generated' "$file"; then
+        echo "Removing existing docker-compose.selenium-chrome_extras.yaml, it's not needed anymore."
+        rm -f "$file"
       else
-        echo "Unwilling to remove '$DDEV_APPROOT/.ddev/docker-compose.selenium-chrome_extras.yaml' because it does not have #ddev-generated in it; you can manually delete it if it is safe to delete."
+        echo "Unwilling to remove '$file' because it does not have #ddev-generated in it; please remove it manually."
+        exit 1
       fi
     fi
