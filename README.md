@@ -7,7 +7,7 @@
 
 ## Overview
 
-Makes it easy to run Functional, FunctionalJavascript, and Nightwatch tests in DDEV. 
+Makes it easy to run Functional, FunctionalJavascript, and Nightwatch tests in DDEV.
 
 This service can be used with any project type. The examples below are Drupal-specific. Contributions for docs and tests that show this service working with other project types are appreciated.
 
@@ -98,7 +98,7 @@ If you use Behat as a test running, adjust your `behat.yml`
 
 ## Contribute
 
-- Anyone is welcome to submit a PR to this repo. See README.md at https://github.com/ddev/ddev-addon-template, the parent of this repo.
+- Anyone is welcome to submit a PR to this repo. See [DDEV Add-on Maintenance Guide](https://ddev.com/blog/ddev-add-on-maintenance-guide/).
 
 ## Credits
 
