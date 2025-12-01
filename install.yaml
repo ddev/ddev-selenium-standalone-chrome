@@ -4,18 +4,16 @@ project_files:
 - docker-compose.selenium-chrome.yaml
 - config.selenium-standalone-chrome.yaml
 
-ddev_version_constraint: '>= v1.24.3'
+ddev_version_constraint: '>= v1.24.10'
 
 post_install_actions:
   - |
-    #ddev-nodisplay
     #ddev-description:Checking docker-compose.selenium-chrome_extras.yaml for changes
     if [ -f docker-compose.selenium-chrome_extras.yaml ] && ! grep -q '#ddev-generated' docker-compose.selenium-chrome_extras.yaml; then
       echo "Existing docker-compose.selenium-chrome_extras.yaml does not have #ddev-generated, so can't be updated"
       exit 2
     fi
   - |
-    #ddev-nodisplay
     #ddev-description:Adding all hostnames to the selenium-chrome container to make them available
     cat <<-END >docker-compose.selenium-chrome_extras.yaml
     #ddev-generated
@@ -30,7 +28,6 @@ post_install_actions:
 
 removal_actions:
   - |
-    #ddev-nodisplay
     #ddev-description:Remove docker-compose.selenium-chrome_extras.yaml file
     if [ -f docker-compose.selenium-chrome_extras.yaml ]; then
       if grep -q '#ddev-generated' docker-compose.selenium-chrome_extras.yaml; then
