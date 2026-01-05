@@ -22,9 +22,6 @@ Functional and FunctionalJavascript tests require the `drupal/core-dev` Composer
 ddev composer require drupal/core-dev
 ```
 
-> [!NOTE]
-> Run `ddev add-on get ddev/ddev-selenium-standalone-chrome` after changes to `name`, `additional_hostnames`, `additional_fqdns`, or `project_tld` in `.ddev/config.yaml` so that `.ddev/docker-compose.selenium-chrome_extras.yaml` is regenerated.
-
 After installation, make sure to commit the `.ddev` directory to version control.
 
 ### Optional steps
