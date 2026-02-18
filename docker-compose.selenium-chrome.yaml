@@ -29,5 +29,5 @@ services:
       com.ddev.approot: $DDEV_APPROOT
     volumes:
       # To enable file uploads in E2E tests.
-      - ${DDEV_APPROOT}:/var/www/html:r
+      - "../:/var/www/html"
       - ".:/mnt/ddev_config"
