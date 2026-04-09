@@ -12,14 +12,14 @@ web_environment:
   # Use disable-dev-shm-usage instead of setting shm_usage
   # https://developers.google.com/web/tools/puppeteer/troubleshooting#tips
   # The format of chromeOptions is defined at https://chromedriver.chromium.org/capabilities
-  - MINK_DRIVER_ARGS_WEBDRIVER=[\"chrome\", {\"browserName\":\"chrome\",\"goog:chromeOptions\":{\"w3c\":true,\"args\":[\"--disable-dev-shm-usage\",\"--disable-gpu\",\"--headless\",\"--dns-prefetch-disable\"]}}, \"http://selenium-chrome:4444/wd/hub\"]
+  - MINK_DRIVER_ARGS_WEBDRIVER=[\"chrome\", {\"browserName\":\"chrome\",\"goog:chromeOptions\":{\"w3c\":${DRUPAL_TEST_WEBDRIVER_W3C:-true},\"args\":[\"--disable-dev-shm-usage\",\"--disable-gpu\",\"--headless\",\"--dns-prefetch-disable\"]}}, \"http://selenium-chrome:4444/wd/hub\"]
   # Nightwatch
   - DRUPAL_TEST_BASE_URL=http://web
   - DRUPAL_TEST_DB_URL=mysql://db:db@db/db
   - DRUPAL_TEST_WEBDRIVER_HOSTNAME=selenium-chrome
   - DRUPAL_TEST_WEBDRIVER_PORT=4444
   - DRUPAL_TEST_WEBDRIVER_PATH_PREFIX=/wd/hub
-  - DRUPAL_TEST_WEBDRIVER_W3C=true
+  - DRUPAL_TEST_WEBDRIVER_W3C=${DRUPAL_TEST_WEBDRIVER_W3C:-true}
   # --window-size=1920,1080 is needed to fix random timeouts in tests. See: https://community.latenode.com/t/selenium-webdriver-timeout-issue-when-running-in-headless-mode-with-c/21952/4
   - DRUPAL_TEST_WEBDRIVER_CHROME_ARGS=--disable-dev-shm-usage --disable-gpu --headless --dns-prefetch-disable --window-size=1920,1080
   - DRUPAL_TEST_CHROMEDRIVER_AUTOSTART=false
@@ -28,4 +28,4 @@ web_environment:
   - DRUPAL_NIGHTWATCH_OUTPUT=reports/nightwatch
   # DTT
   - DTT_BASE_URL=http://web
-  - DTT_MINK_DRIVER_ARGS=[\"chrome\", {\"browserName\":\"chrome\",\"goog:chromeOptions\":{\"w3c\":true,\"args\":[\"--disable-dev-shm-usage\",\"--disable-gpu\",\"--headless\",\"--dns-prefetch-disable\"]}}, \"http://selenium-chrome:4444/wd/hub\"]
+  - DTT_MINK_DRIVER_ARGS=[\"chrome\", {\"browserName\":\"chrome\",\"goog:chromeOptions\":{\"w3c\":${DRUPAL_TEST_WEBDRIVER_W3C:-true},\"args\":[\"--disable-dev-shm-usage\",\"--disable-gpu\",\"--headless\",\"--dns-prefetch-disable\"]}}, \"http://selenium-chrome:4444/wd/hub\"]
