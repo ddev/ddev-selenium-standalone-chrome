@@ -24,6 +24,30 @@ ddev composer require drupal/core-dev
 
 After installation, make sure to commit the `.ddev` directory to version control.
 
+### (optional) Configuring W3C compliance mode
+
+By default, WebDriver W3C compliance is enabled (`DRUPAL_TEST_WEBDRIVER_W3C=true`). This controls the `w3c` flag in both `MINK_DRIVER_ARGS_WEBDRIVER` and `DTT_MINK_DRIVER_ARGS`.
+
+If you are running tests on Drupal < 11, you may need to disable W3C mode to avoid WebDriver curl errors (HTTP 400) during test runs. You have a few ways to override it:
+
+**Using `ddev dotenv`** (recommended, keeps it out of version control):
+
+```bash
+ddev dotenv set .ddev/.env.web --drupal-test-webdriver-w3c false
+ddev restart
+```
+
+**Using `.ddev/config.yaml`** (commit this if the whole team needs the same setting):
+
+```yaml
+web_environment:
+  - DRUPAL_TEST_WEBDRIVER_W3C=false
+```
+
+Then run `ddev restart`.
+
+> **Note:** Only disable W3C mode if your tests are failing with HTTP 400 curl errors from the WebDriver endpoint. See [issue #76](https://github.com/ddev/ddev-selenium-standalone-chrome/issues/76) for the original bug report.
+
 ### Optional steps
 
 1. Update the provided `.ddev/config.selenium-standalone-chrome.yaml` as you see fit (and remove the #ddev-generated line). You can also just override lines in your `.ddev/config.yaml`
@@ -44,30 +68,6 @@ After installation, make sure to commit the `.ddev` directory to version control
   - Drupal Test Traits
     - Ensure you have a working site that has the `weitzman/drupal-test-traits` Composer package.
     - `ddev exec -d /var/www/html/web "../vendor/bin/phpunit --bootstrap=../vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php --printer '\Drupal\Tests\Listeners\HtmlOutputPrinter' ../vendor/weitzman/drupal-test-traits/tests/ExampleSelenium2DriverTest.php"`
-
-### Configuring W3C compliance mode
-
-By default, WebDriver W3C compliance is enabled (`DRUPAL_TEST_WEBDRIVER_W3C=true`). This controls the `w3c` flag in both `MINK_DRIVER_ARGS_WEBDRIVER` and `DTT_MINK_DRIVER_ARGS`.
-
-If you are running tests on Drupal < 11, you may need to disable W3C mode to avoid WebDriver curl errors (HTTP 400) during test runs. You have a few ways to override it:
-
-**Using `ddev dotenv`** (recommended, keeps it out of version control):
-
-```bash
-ddev dotenv set .ddev/.env --drupal-test-webdriver-w3c false
-ddev restart
-```
-
-**Using `.ddev/config.yaml`** (commit this if the whole team needs the same setting):
-
-```yaml
-web_environment:
-  - DRUPAL_TEST_WEBDRIVER_W3C=false
-```
-
-Then run `ddev restart`.
-
-> **Note:** Only disable W3C mode if your tests are failing with HTTP 400 curl errors from the WebDriver endpoint. See [issue #76](https://github.com/ddev/ddev-selenium-standalone-chrome/issues/76) for the original bug report.
 
 ## Watching the tests
 
