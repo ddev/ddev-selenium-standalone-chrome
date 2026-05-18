@@ -11,10 +11,22 @@ Makes it easy to run Functional, FunctionalJavascript, Nightwatch, Behat and Dru
 
 This service can be used with any project type. The examples below are Drupal-specific. Contributions for docs and tests that show this service working with other project types are appreciated.
 
+## Drupal version compatibility
+
+| Drupal version | Recommended add-on version |
+|---|---|
+| Drupal 10 | **v1** — `ddev add-on get ddev/ddev-selenium-standalone-chrome --version 1.x` (or pin a specific [v1 tag](https://github.com/ddev/ddev-selenium-standalone-chrome/releases?q=1.x)) |
+| Drupal 11+ | **v2** — `ddev add-on get ddev/ddev-selenium-standalone-chrome` |
+
+v2 ships a recent Selenium Grid 4 image and enables W3C compliance mode by default. Drupal 10's WebDriver client is not fully W3C compliant, which causes HTTP 400 errors against newer Grid 4 releases. v1 ships Selenium Grid 4.1.4, which tolerates non-W3C requests and remains compatible with Drupal 10.
+
+> [!NOTE]
+> See [issue #76](https://github.com/ddev/ddev-selenium-standalone-chrome/issues/76) for the full background. If you are on Drupal 11 or later, use v2.
+
 ## Installation
 
 ```bash
-ddev add-on get ddev/ddev-selenium-standalone-chrome
+ddev add-on get ddev/ddev-selenium-standalone-chrome --version 1.x # RECOMMENDED: Pin a specific v1 tag: https://github.com/ddev/ddev-selenium-standalone-chrome/releases?q=1.x
 ddev restart
 ```
 
