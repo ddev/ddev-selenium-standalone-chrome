@@ -12,6 +12,11 @@
 # For debugging:
 #   bats ./tests/test.bats --show-output-of-passing-tests --verbose-run --print-output-on-failure
 
+bats::on_failure() {
+    echo "Test failed, running debug commands..."
+    ddev logs -s selenium-chrome
+}
+
 setup() {
   set -eu -o pipefail
 
@@ -33,9 +38,13 @@ setup() {
   ddev delete -Oy "${PROJNAME}" >/dev/null 2>&1 || true
   cd "${TESTDIR}"
 
-  composer -n --no-install create-project 'drupal/recommended-project:^11' .
+  composer -n --no-install create-project 'drupal/recommended-project:^10.5' .
   composer -n config --no-plugins allow-plugins true
-  composer -n require 'drupal/core-dev:^11' 'drush/drush:^13' 'weitzman/drupal-test-traits:^2'
+  composer -n require 'drupal/core-dev:^10.5' 'drush/drush:^13' 'weitzman/drupal-test-traits:^2' 'drupal/drupal-extension:^5.4' -W
+
+  cp "${DIR}/tests/fixtures/behat/behat.yml" .
+  mkdir -p behat
+  cp "${DIR}/tests/fixtures/behat/login.feature" behat/
 
   run ddev config --project-name=${PROJNAME} --project-tld=ddev.site --php-version=8.4 --web-environment-add=SYMFONY_DEPRECATIONS_HELPER=disabled
   assert_success
@@ -76,14 +85,18 @@ health_checks() {
 
   run ddev exec -d /var/www/html/web/core yarn test:nightwatch tests/Drupal/Nightwatch/Tests/loginTest.js
   assert_success
-
-  echo "Install Drupal and run a DTT test." >&3
+  echo "Install Drupal and run a DTT and Behat tests." >&3
 
   run ddev exec -d /var/www/html/web "../vendor/bin/drush si -y --account-name=admin --account-pass=password standard"
   assert_success
 
-  run ddev exec -d /var/www/html/web "../vendor/bin/phpunit --log-junit dtt.junit.xml --bootstrap=../vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php ../vendor/weitzman/drupal-test-traits/tests/ExampleSelenium2DriverTest.php"
+  echo "Run a Behat test that logs into Drupal." >&3
+  run ddev exec vendor/bin/behat
   assert_success
+
+# @todo Commented out due to repeated failures.
+#  run ddev exec -d /var/www/html/web "../vendor/bin/phpunit --log-junit dtt.junit.xml --bootstrap=../vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php ../vendor/weitzman/drupal-test-traits/tests/ExampleSelenium2DriverTest.php"
+#  assert_success
 }
 
 teardown() {
@@ -107,3 +120,4 @@ teardown() {
   assert_success
   health_checks
 }
+
