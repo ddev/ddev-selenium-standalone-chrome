@@ -31,16 +31,19 @@ setup() {
 
   export DIR="$(cd "$(dirname "${BATS_TEST_FILENAME}")/.." >/dev/null 2>&1 && pwd)"
   export PROJNAME="test-$(basename "${GITHUB_REPO}")"
-  mkdir -p ~/tmp
-  export TESTDIR=$(mktemp -d ~/tmp/${PROJNAME}.XXXXXX)
+  mkdir -p "${HOME}/tmp"
+  export TESTDIR="$(mktemp -d "${HOME}/tmp/${PROJNAME}.XXXXXX")"
   export DDEV_NONINTERACTIVE=true
   export DDEV_NO_INSTRUMENTATION=true
   ddev delete -Oy "${PROJNAME}" >/dev/null 2>&1 || true
   cd "${TESTDIR}"
 
-  composer -n --no-install create-project 'drupal/recommended-project:^11' .
-  composer -n config --no-plugins allow-plugins true
-  composer -n require 'drupal/core-dev:^11' 'drush/drush:^13' 'weitzman/drupal-test-traits:^2' 'drupal/drupal-extension:^5.4' -W
+  run composer -n --no-install create-project 'drupal/recommended-project:^11' .
+  assert_success
+  run composer -n config --no-plugins allow-plugins true
+  assert_success
+  run composer -n require 'drupal/core-dev:^11' 'drush/drush:^13' 'weitzman/drupal-test-traits:^2' 'drupal/drupal-extension:^5.4' -W --no-security-blocking
+  assert_success
 
   cp "${DIR}/tests/fixtures/behat/behat.yml" .
   mkdir -p behat
