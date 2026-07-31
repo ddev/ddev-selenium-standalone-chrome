@@ -64,6 +64,12 @@ health_checks() {
   assert_success
   assert_output --partial "Selenium Grid ready."
 
+  echo "Ensure the DDEV mkcert CA is trusted by the browser." >&3
+
+  run ddev exec -s selenium-chrome certutil -d sql:/home/seluser/.pki/nssdb -L
+  assert_success
+  assert_output --partial "ddev-mkcert"
+
   echo "Run a FunctionalJavascript test." >&3
 
   run ddev exec -d /var/www/html/web "../vendor/bin/phpunit -c ./core/phpunit.xml.dist ./core/modules/system/tests/src/FunctionalJavascript/FrameworkTest.php"
