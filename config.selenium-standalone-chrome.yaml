@@ -38,6 +38,7 @@ hooks:
     # HTTPS do not land on a certificate warning page instead of the site.
     - exec: |
         if [ -f /mnt/ddev-global-cache/mkcert/rootCA.pem ]; then
+          certutil -d sql:/home/seluser/.pki/nssdb -D -n ddev-mkcert 2>/dev/null || true
           certutil -d sql:/home/seluser/.pki/nssdb -A -t "C,," -n ddev-mkcert -i /mnt/ddev-global-cache/mkcert/rootCA.pem
         fi
       service: selenium-chrome
