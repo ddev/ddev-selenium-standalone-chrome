@@ -15,7 +15,7 @@ on:
     inputs:
       debug_enabled:
         type: boolean
-        description: Debug with tmate
+        description: Enable remote debugging session
         required: false
         default: false
 
@@ -30,10 +30,11 @@ jobs:
   tests:
     strategy:
       matrix:
+        os: [ubuntu-latest, ubuntu-26.04-arm]
         ddev_version: [stable, HEAD]
       fail-fast: false
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
 
     steps:
       - uses: ddev/github-action-add-on-test@v2
@@ -58,7 +59,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: artifact-${{ matrix.ddev_version }}
+          name: artifact-${{ matrix.os }}-${{ matrix.ddev_version }}
           path: |
             ${{ env.TESTDIR }}*/web/sites/simpletest/browser_output
             ${{ env.TESTDIR }}*/web/*.junit.xml
