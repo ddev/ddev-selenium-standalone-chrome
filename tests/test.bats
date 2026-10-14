@@ -38,21 +38,22 @@ setup() {
   ddev delete -Oy "${PROJNAME}" >/dev/null 2>&1 || true
   cd "${TESTDIR}"
 
-  run composer -n --no-install create-project 'drupal/recommended-project:^11' .
+  run ddev config --project-name=${PROJNAME} --project-type=drupal11 --docroot=web --project-tld=ddev.site --php-version=8.4 --web-environment-add=SYMFONY_DEPRECATIONS_HELPER=disabled
   assert_success
-  run composer -n config --no-plugins allow-plugins true
+  run ddev start -y
   assert_success
-  run composer -n require 'drupal/core-dev:^11' 'drush/drush:^13' 'weitzman/drupal-test-traits:^2' 'drupal/drupal-extension:^5.4' -W --no-security-blocking
+
+  run ddev composer create-project -n --no-install 'drupal/recommended-project:^11'
+  assert_success
+  run ddev composer -n config --no-plugins allow-plugins true
+  assert_success
+  run ddev composer -n require 'drupal/core-dev:^11' 'drush/drush:^13' 'weitzman/drupal-test-traits:^2' 'drupal/drupal-extension:^5.4' -W --no-security-blocking
   assert_success
 
   cp "${DIR}/tests/fixtures/behat/behat.yml" .
   mkdir -p behat
   cp "${DIR}/tests/fixtures/behat/login.feature" behat/
-
-  run ddev config --project-name=${PROJNAME} --project-tld=ddev.site --php-version=8.4 --web-environment-add=SYMFONY_DEPRECATIONS_HELPER=disabled
-  assert_success
-  run ddev start -y
-  assert_success
+  cp -r "${DIR}/tests/fixtures/behat/bootstrap" behat/
 }
 
 health_checks() {
