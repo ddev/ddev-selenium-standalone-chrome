@@ -11,4 +11,4 @@ Feature: User login
       | name | test-usera |
       | pass | test123   |
     And I press the "Log in" button
-    And I should see the link "Edit"
+    Then I should eventually see the link "Edit"
