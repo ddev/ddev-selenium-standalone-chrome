@@ -6,8 +6,43 @@
 #
 services:
   selenium-chrome:
-    image: selenium/standalone-chromium:138.0
+    image: ${SELENIUM_CHROME_DOCKER_IMAGE:-selenium/standalone-chromium:138.0}-${DDEV_SITENAME}-built
+    build:
+      # The upstream image runs as "seluser" (uid 1200). Turn that user into
+      # the host user (same name, uid and gid) so files the browser reads or
+      # writes in the mounted project have the right ownership.
+      # The home directory stays /home/seluser, which the image expects.
+      dockerfile_inline: |
+        ARG SELENIUM_CHROME_DOCKER_IMAGE="scratch"
+        FROM $${SELENIUM_CHROME_DOCKER_IMAGE}
+        USER root
+        ARG username
+        ARG uid
+        ARG gid
+        RUN set -eu; \
+          old_uid="$$(id -u seluser)"; old_gid="$$(id -g seluser)"; \
+          for u in "$$(getent passwd "$${uid}" | cut -d: -f1)" "$$(getent passwd "$${username}" | cut -d: -f1)"; do \
+            if [ -n "$${u}" ] && [ "$${u}" != "seluser" ]; then userdel "$${u}"; fi; \
+          done; \
+          for g in "$$(getent group "$${gid}" | cut -d: -f1)" "$$(getent group "$${username}" | cut -d: -f1)"; do \
+            if [ -n "$${g}" ] && [ "$${g}" != "seluser" ]; then groupdel "$${g}" || true; fi; \
+          done; \
+          groupmod -o -g "$${gid}" seluser; \
+          if ! getent group "$${username}" >/dev/null; then groupmod -n "$${username}" seluser; fi; \
+          usermod -o -u "$${uid}" -g "$${gid}" seluser; \
+          if [ "$${username}" != "seluser" ]; then usermod -l "$${username}" seluser; fi; \
+          find / -xdev -uid "$${old_uid}" -exec chown -h "$${uid}" {} +; \
+          find / -xdev -gid "$${old_gid}" -exec chgrp -h "$${gid}" {} +
+        USER $${uid}:$${gid}
+      args:
+        SELENIUM_CHROME_DOCKER_IMAGE: ${SELENIUM_CHROME_DOCKER_IMAGE:-selenium/standalone-chromium:138.0}
+        username: ${DDEV_USER}
+        uid: ${DDEV_UID}
+        gid: ${DDEV_GID}
     container_name: ddev-${DDEV_SITENAME}-selenium-chrome
+    hostname: ${DDEV_SITENAME}-selenium-chrome
+    user: "${DDEV_UID}:${DDEV_GID}"
+    restart: "no"
     expose:
       #      The internal noVNC port, which operates over HTTP so it can be exposed
       #      through the router.
@@ -24,9 +59,6 @@ services:
     # uncomment the following two lines.
     #ports:
     #  - "5900:5900"
-    labels:
-      com.ddev.site-name: ${DDEV_SITENAME}
-      com.ddev.approot: $DDEV_APPROOT
     volumes:
       # To enable file uploads in E2E tests.
       - "../:/var/www/html"
@@ -34,3 +66,8 @@ services:
       # Provides mkcert/rootCA.pem to the post-start hook in
       # config.selenium-standalone-chrome.yaml.
       - "ddev-global-cache:/mnt/ddev-global-cache"
+    x-ddev:
+      ssh-shell: bash
+      describe-info: |
+        WebDriver: http://selenium-chrome:4444/wd/hub
+        Watch tests (noVNC): ddev launch :7900

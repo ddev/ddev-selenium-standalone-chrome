@@ -66,6 +66,16 @@ health_checks() {
   assert_success
   assert_output --partial "Selenium Grid ready."
 
+  echo "Ensure the selenium-chrome container runs as the host user." >&3
+
+  run ddev exec -s selenium-chrome id -u
+  assert_success
+  assert_output "$(id -u)"
+
+  run ddev exec -s selenium-chrome id -g
+  assert_success
+  assert_output "$(id -g)"
+
   echo "Ensure the DDEV mkcert CA is trusted by the browser." >&3
 
   run ddev exec -s selenium-chrome certutil -d sql:/home/seluser/.pki/nssdb -L
