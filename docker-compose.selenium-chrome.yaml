@@ -35,7 +35,7 @@ services:
           find / -xdev -gid "$${old_gid}" -exec chgrp -h "$${gid}" {} +
         USER $${uid}:$${gid}
       args:
-        SELENIUM_CHROME_DOCKER_IMAGE: ${SELENIUM_CHROME_DOCKER_IMAGE:-selenium/standalone-chromium:138.0}
+        SELENIUM_CHROME_DOCKER_IMAGE: ${SELENIUM_CHROME_DOCKER_IMAGE:-selenium/standalone-chromium:155.0}
         username: ${DDEV_USER}
         uid: ${DDEV_UID}
         gid: ${DDEV_GID}
