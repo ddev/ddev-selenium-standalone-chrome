@@ -6,7 +6,7 @@
 #
 services:
   selenium-chrome:
-    image: ${SELENIUM_CHROME_DOCKER_IMAGE:-selenium/standalone-chromium:138.0}-${DDEV_SITENAME}-built
+    image: ${SELENIUM_CHROME_DOCKER_IMAGE:-selenium/standalone-chromium:155.0}-${DDEV_SITENAME}-built
     build:
       # The upstream image runs as "seluser" (uid 1200). Turn that user into
       # the host user (same name, uid and gid) so files the browser reads or
