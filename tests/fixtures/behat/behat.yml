@@ -1,8 +1,11 @@
 default:
+  autoload:
+    '': "%paths.base%/behat/bootstrap"
   suites:
     default:
       paths:
         - "%paths.base%/behat"
       contexts:
+        - FeatureContext
         - Drupal\DrupalExtension\Context\DrupalContext
         - Drupal\DrupalExtension\Context\MinkContext
