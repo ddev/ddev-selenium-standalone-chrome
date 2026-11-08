@@ -101,7 +101,7 @@ Note that when using `ports`, only one project at a time can be running with por
 
 ## Contribute
 
-- Anyone is welcome to submit a PR to this repo. See README.md at https://github.com/ddev/ddev-addon-template, the parent of this repo.
+- Anyone is welcome to submit a PR to this repo. See README.md at https://github.com/ddev/ddev-selenium-standalone-chrome.
 
 ## Credits
 
