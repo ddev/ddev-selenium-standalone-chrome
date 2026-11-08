@@ -66,6 +66,16 @@ health_checks() {
   assert_success
   assert_output --partial "Selenium Grid ready."
 
+  echo "Ensure the selenium-chrome container runs as the host user." >&3
+
+  run ddev exec -s selenium-chrome id -u
+  assert_success
+  assert_output "$(id -u)"
+
+  run ddev exec -s selenium-chrome id -g
+  assert_success
+  assert_output "$(id -g)"
+
   echo "Run a FunctionalJavascript test." >&3
 
   run ddev exec -d /var/www/html/web "../vendor/bin/phpunit -c ./core/phpunit.xml.dist ./core/modules/system/tests/src/FunctionalJavascript/FrameworkTest.php"
