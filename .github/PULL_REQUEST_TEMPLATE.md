@@ -1,15 +1,23 @@
+## Short Summary (TL;DR)
+
+<!-- Required. One or two sentences a reviewer can read at a glance: what this changes, and why. Write it last, but put it here first. If it needs a paragraph, the detail belongs in the sections below. -->
+
 ## The Issue
 
-- #<issue number>
+- Fixes #REPLACE_ME_WITH_RELATED_ISSUE_NUMBER
 
 <!-- Provide a brief description of the issue. -->
 
 ## How This PR Solves The Issue
 
+<!-- Describe the key change(s) in this PR that address the issue above. -->
+
 ## Manual Testing Instructions
 
+<!-- If this PR changes logic, consider adding additional steps or context to the instructions below. -->
+
 ```bash
-ddev add-on get https://github.com/<user>/<repo>/tarball/<branch>
+ddev add-on get ddev/ddev-selenium-standalone-chrome --pr REPLACE_ME_WITH_THIS_PR_NUMBER
 ddev restart
 ```
 
